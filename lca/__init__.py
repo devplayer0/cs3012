@@ -6,6 +6,17 @@ class Node:
         self.left = None
         self.right = None
 
+    def path(self, root):
+        path = []
+        n = self
+
+        # Truthy until the root is reached
+        while n:
+            path.append(n)
+            n = n.parent
+
+        return path
+
     def lca(self, a, b):
         # Base case
         if a == b:
