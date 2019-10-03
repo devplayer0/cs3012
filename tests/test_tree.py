@@ -53,6 +53,12 @@ def test_lca():
     root.right.left.right = Node(4)
     root.right.right = Node(9)
 
+    # Simple cases
     assert lca(root.left, root.right) == root
     assert lca(root.left.left, root.left.right) == root.left
     assert lca(root.right.right, root.right.left) == root.right
+
+    # Differing heights
+    assert lca(root.left.left, root.left.right.left) == root.left
+    assert lca(root.right.right, root.right.left.right) == root.right
+    assert lca(root.left.right.left, root.right.left.right) == root

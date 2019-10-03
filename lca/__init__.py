@@ -35,6 +35,11 @@ class Node:
             return self.value > other.value
         return NotImplemented
 
+    def __str__(self):
+        return str(self.value)
+    def __repr__(self):
+        return f'Node({self.value})'
+
 def lca(a, b):
     # Base case
     if a == b:
