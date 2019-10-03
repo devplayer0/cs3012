@@ -1,6 +1,6 @@
 import pytest
 
-from lca import Node
+from lca import Node, lca
 
 def test_assignment():
     root = Node(123)
@@ -33,3 +33,26 @@ def test_comparison():
 
     assert root != 123
     assert root.left != 456
+
+#      0
+#    /   \
+#   1    2
+#  / \  / \
+# 8  5 3  9
+#   / \ \
+#  6  7 4
+def test_lca():
+    root = Node(0)
+    root.left = Node(1)
+    root.left.left = Node(8)
+    root.left.right = Node(5)
+    root.left.right.left = Node(6)
+    root.left.right.right = Node(7)
+    root.right = Node(2)
+    root.right.left = Node(3)
+    root.right.left.right = Node(4)
+    root.right.right = Node(9)
+
+    assert lca(root.left, root.right) == root
+    assert lca(root.left.left, root.left.right) == root.left
+    assert lca(root.right.right, root.right.left) == root.right
