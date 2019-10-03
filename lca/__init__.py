@@ -25,7 +25,12 @@ class Node:
         return path
 
     def lca(self, a, b):
-        pairs = zip(reversed(a.path(self)), reversed(b.path(self)))
+        a_path = a.path(self)
+        b_path = b.path(self)
+        if not a_path or not b_path:
+            return None
+
+        pairs = zip(reversed(a_path), reversed(b_path))
 
         lca = None
         for a, b in pairs:
