@@ -20,8 +20,11 @@ def test_comparison():
     root.right.left.left = Node(999)
 
     assert root.left > root
+    assert root < root.left
     assert root.left == root.left.left
     assert root.right > root.left.left
     assert root.right.left.left.parent == root.left
     assert root.left != root
     assert not root.left != root.left.left
+    assert root.left.left >= root.left
+    assert root.left <= root.left.left
