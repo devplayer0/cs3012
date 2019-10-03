@@ -8,7 +8,8 @@ class Node:
 
     def __setattr__(self, name, value):
         if name in ('left', 'right'):
-            value.parent = self
+            if value:
+                value.parent = self
             self.__dict__[name] = value
             return
         self.__dict__[name] = value
