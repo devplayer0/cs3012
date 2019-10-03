@@ -40,6 +40,17 @@ def test_comparison():
     assert root != 123
     assert root.left != 456
 
+def test_path():
+    root = Node(0)
+    root.right = Node(1)
+    root.left = Node(2)
+    root.left.right = Node(3)
+    root.left.right.right = Node(4)
+
+    assert root.right.path(root) == [Node(1), Node(0)]
+    assert root.left.right.right.path(root) == [Node(4), Node(3), Node(2), Node(0)]
+    assert not root.right.path(root.left)
+
 #      0
 #    /   \
 #   1    2
