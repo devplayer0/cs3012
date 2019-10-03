@@ -1,4 +1,5 @@
 from lca import Node
 
-def test_sum():
-    assert 2 + 2 == 4
+def test_assignment():
+    root = Node(123)
+    assert root.parent == None
