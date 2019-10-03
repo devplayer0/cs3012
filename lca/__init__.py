@@ -34,3 +34,11 @@ class Node:
         if isinstance(other, Node):
             return self.value > other.value
         return NotImplemented
+
+def lca(a, b):
+    # Base case
+    if a == b:
+        return a
+
+    # Recurse
+    return lca(a.parent, b.parent)
