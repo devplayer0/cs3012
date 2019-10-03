@@ -50,6 +50,7 @@ def test_path():
     assert root.right.path(root) == [Node(1), Node(0)]
     assert root.left.right.right.path(root) == [Node(4), Node(3), Node(2), Node(0)]
     assert not root.right.path(root.left)
+    assert root.left.right.right.path(root.left) == [Node(4), Node(3), Node(2)]
 
 #      0
 #    /   \
@@ -79,3 +80,7 @@ def test_lca():
     assert root.lca(root.left.left, root.left.right.left) == root.left
     assert root.lca(root.right.right, root.right.left.right) == root.right
     assert root.lca(root.left.right.left, root.right.left.right) == root
+
+    # Differing roots
+    assert root.right.lca(root.right.left, root.right.right) == root.left
+    assert root.left.lca(root.left.left, root.left.right.right) == root.left
