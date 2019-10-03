@@ -6,6 +6,14 @@ class Node:
         self.left = None
         self.right = None
 
+    def lca(self, a, b):
+        # Base case
+        if a == b:
+            return a
+
+        # Recurse
+        return self.lca(a.parent, b.parent)
+
     def __setattr__(self, name, value):
         if name in ('left', 'right'):
             if value:
@@ -39,11 +47,3 @@ class Node:
         return str(self.value)
     def __repr__(self):
         return f'Node({self.value})'
-
-def lca(a, b):
-    # Base case
-    if a == b:
-        return a
-
-    # Recurse
-    return lca(a.parent, b.parent)
