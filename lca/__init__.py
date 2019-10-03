@@ -21,12 +21,14 @@ class Node:
         return path
 
     def lca(self, a, b):
-        # Base case
-        if a == b:
-            return a
+        pairs = zip(reversed(a.path(self)), reversed(b.path(self)))
 
-        # Recurse
-        return self.lca(a.parent, b.parent)
+        lca = None
+        for a, b in pairs:
+            if a != b:
+                break
+            lca = a
+        return lca
 
     def __setattr__(self, name, value):
         if name in ('left', 'right'):
