@@ -84,3 +84,6 @@ def test_lca():
     # Differing roots
     assert root.right.lca(root.right.left, root.right.right) == root.right
     assert root.left.lca(root.left.left, root.left.right.right) == root.left
+
+    # No common ancestors
+    assert root.left.lca(root.left.right, root.right) == None
