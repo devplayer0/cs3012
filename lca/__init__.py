@@ -15,6 +15,9 @@ class Node:
             path.append(n)
             n = n.parent
 
+        # Ensure last element is the desired root
+        if path[-1] != root:
+            return None
         return path
 
     def lca(self, a, b):
