@@ -1,3 +1,5 @@
+import pytest
+
 from lca import Node
 
 def test_assignment():
@@ -28,3 +30,6 @@ def test_comparison():
     assert not root.left != root.left.left
     assert root.left.left >= root.left
     assert root.left <= root.left.left
+
+    assert root != 123
+    assert root.left != 456
