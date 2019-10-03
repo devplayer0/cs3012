@@ -13,6 +13,12 @@ def test_assignment():
     assert root.left.right.parent == root.left
     assert root.left.parent == root
 
+def test_str():
+    root = Node(123)
+
+    assert str(root) == '123'
+    assert repr(root) == 'Node(123)'
+
 def test_comparison():
     root = Node(123)
     root.left = Node(456)
