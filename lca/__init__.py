@@ -13,6 +13,10 @@ class Node:
         # Truthy until the root is reached
         while n:
             path.append(n)
+
+            # Stop if we've reached the requested root
+            if n == root:
+                break
             n = n.parent
 
         # Ensure last element is the desired root
