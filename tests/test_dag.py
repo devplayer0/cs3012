@@ -89,6 +89,10 @@ def test_operator_contents():
     assert [(1, 0)] in dag
     assert [(0, 1), (2, 1), (5, 6), (1, 0)] not in dag
 
+    assert [(0, 1), 2, 0, (2, 1)] in dag
+    assert [(0, 1), 2, (2, 1), 5] not in dag
+    assert [[0, 1, 2], 0] not in dag
+
 def test_deletion():
     dag = DAG()
     dag\
