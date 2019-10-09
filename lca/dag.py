@@ -57,3 +57,9 @@ class DAG:
             if not self.__contains_impl(i):
                 return False
         return True
+
+    def __eq__(self, other):
+        if not isinstance(other, DAG):
+            return NotImplemented
+        # Will test equality for keys (vertices) and values (adjacency sets - `__eq__()` _will_ do a proper comparison)
+        return other.__vertices == self.__vertices
