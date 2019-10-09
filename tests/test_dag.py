@@ -1,3 +1,5 @@
+import pytest
+
 from lca.dag import DAG
 
 def test_construction():
@@ -42,3 +44,27 @@ def test_contents():
     assert dag.contains_edge(1, 0)
     assert not dag.contains_edge(1, 2)
     assert not dag.contains_edge(5, 6)
+
+def test_deletion():
+    dag = DAG()
+    dag\
+        .edge(0, 1)\
+        .edge(1, 0)\
+        .edge(2, 1)
+
+    dag.remove_edge(0, 1)
+    assert not dag.contains_edge(0, 1)
+    assert dag.adjacent(0) == set()
+    assert dag.contains_edge(1, 0)
+    assert dag.contains_vertex(0)
+    with pytest.raises(KeyError):
+        dag.remove_edge(0, 1)
+
+    dag.remove_vertex(1)
+    assert not dag.contains_vertex(1)
+    assert not dag.contains_edge(1, 0)
+    assert not dag.contains_edge(2, 1)
+    assert dag.adjacent(2) == set()
+    assert dag.contains_vertex(2)
+    with pytest.raises(KeyError):
+        dag.adjacent(1)
