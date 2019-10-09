@@ -47,6 +47,9 @@ class DAG:
     def remove_edge(self, a, b):
         self.__vertices[a].remove(b)
 
+    def lca(self, root, a, b):
+        return None
+
     def __setitem__(self, v, adjacent):
         if v in self.__vertices:
             self.__vertices[v] = set()

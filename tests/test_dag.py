@@ -167,3 +167,19 @@ def test_deletion():
     assert dag.contains_vertex(2)
     with pytest.raises(KeyError):
         dag.adjacent(1)
+
+#       0
+#     ↙ ↓ ↘
+#    1  2  3
+#   ↙ ↘   / ↘
+#  4  5 ←    6
+def test_lca():
+    dag = DAG()
+    dag[0] = [1, 2, 3]
+    dag[1] = [4, 5]
+    dag[3] = [5, 6]
+
+    # Basic tests
+    assert dag.lca(0, 1, 2) == 0
+    assert dag.lca(0, 1, 3) == 0
+    assert dag.lca(0, 2, 3) == 0
