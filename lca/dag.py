@@ -30,12 +30,10 @@ class DAG:
     def is_subgraph(self, other):
         if not isinstance(other, DAG):
             return False
-
         return other.__vertices <= self.__vertices
     def is_supergraph(self, other):
         if not isinstance(other, DAG):
             return False
-
         return other.__vertices >= self.__vertices
 
     def remove_vertex(self, v):
@@ -74,3 +72,12 @@ class DAG:
             return NotImplemented
         # Will test equality for keys (vertices) and values (adjacency sets - `__eq__()` _will_ do a proper comparison)
         return other.__vertices == self.__vertices
+
+    def __le__(self, other):
+        if not isinstance(other, DAG):
+            return NotImplemented
+        return self.is_subgraph(other)
+    def __ge__(self, other):
+        if not isinstance(other, DAG):
+            return NotImplemented
+        return self.is_supergraph(other)
