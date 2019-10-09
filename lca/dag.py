@@ -27,6 +27,17 @@ class DAG:
     def contains_edge(self, a, b):
         return self.contains_vertex(a) and b in self.__vertices[a]
 
+    def is_subgraph(self, other):
+        if not isinstance(other, DAG):
+            return False
+
+        return other.__vertices <= self.__vertices
+    def is_supergraph(self, other):
+        if not isinstance(other, DAG):
+            return False
+
+        return other.__vertices >= self.__vertices
+
     def remove_vertex(self, v):
         del self.__vertices[v]
         for adjacent in self.__vertices.values():
