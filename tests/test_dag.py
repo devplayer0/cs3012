@@ -156,6 +156,24 @@ def test_deletion():
 #       0
 #     ↙ ↓ ↘
 #    1  2  3
+#   ↙ ↘     ↘
+#  4  5      6
+def test_path():
+    dag = DAG()
+    dag[0] = [1, 2, 3]
+    dag[1] = [4, 5]
+    dag[3] = [6]
+
+    assert dag.path(0, 2) == [0, 2]
+    assert not dag.path(2, 0)
+    assert dag.path(0, 0) == [0]
+    assert dag.path(0, 6) == [0, 3, 6]
+
+    assert dag.path(1, 5) == [1, 5]
+
+#       0
+#     ↙ ↓ ↘
+#    1  2  3
 #   ↙ ↘   / ↘
 #  4  5 ←    6
 def test_lca():
