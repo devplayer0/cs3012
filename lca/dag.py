@@ -1,33 +1,33 @@
 class DAG:
     def __init__(self):
-        self.__nodes = {}
+        self.__vertices = {}
 
     def vertex(self, v):
-        self.__nodes[v] = set()
+        self.__vertices[v] = set()
         return self
 
     def edge(self, a, b):
-        if a not in self.__nodes:
+        if a not in self.__vertices:
             self.vertex(a)
-        if b not in self.__nodes:
+        if b not in self.__vertices:
             self.vertex(b)
 
-        self.__nodes[a].add(b)
+        self.__vertices[a].add(b)
         return self
 
     def adjacent(self, v):
-        return self.__nodes[v]
+        return self.__vertices[v]
 
     def contains_vertex(self, v):
-        return v in self.__nodes
+        return v in self.__vertices
 
     def contains_edge(self, a, b):
-        return self.contains_vertex(a) and b in self.__nodes[a]
+        return self.contains_vertex(a) and b in self.__vertices[a]
 
     def remove_vertex(self, v):
-        del self.__nodes[v]
-        for adjacent in self.__nodes.values():
+        del self.__vertices[v]
+        for adjacent in self.__vertices.values():
             adjacent.discard(v)
 
     def remove_edge(self, a, b):
-        self.__nodes[a].remove(b)
+        self.__vertices[a].remove(b)
