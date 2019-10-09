@@ -1,5 +1,3 @@
-from collections.abc import Iterable
-
 class DAG:
     def __init__(self):
         self.__vertices = {}
@@ -60,18 +58,16 @@ class DAG:
     def __getitem__(self, v):
         return self.adjacent(v)
 
-    def __contains_impl(self, item):
+    def __delitem__(self, item):
+        if isinstance(item, tuple):
+            self.remove_edge(*item)
+        else:
+            self.remove_vertex(item)
+
+    def __contains__(self, item):
         if isinstance(item, tuple):
             return self.contains_edge(*item)
         return self.contains_vertex(item)
-    def __contains__(self, item):
-        if isinstance(item, tuple) or not isinstance(item, Iterable):
-            return self.__contains_impl(item)
-
-        for i in item:
-            if not self.__contains_impl(i):
-                return False
-        return True
 
     def __eq__(self, other):
         if not isinstance(other, DAG):

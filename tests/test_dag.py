@@ -73,26 +73,11 @@ def test_operator_contents():
     assert 1 in dag
     assert 5 not in dag
 
-    assert [0, 2, 1] in dag
-    assert [0, 1] in dag
-    assert [1] in dag
-    assert [0, 2, 1, 5] not in dag
-
     assert (0, 1) in dag
     assert (2, 1) in dag
     assert (1, 0) in dag
     assert (1, 2) not in dag
     assert (5, 6) not in dag
-
-    assert [(0, 1), (2, 1), (1, 0)] in dag
-    assert [(2, 1), (1, 0)] in dag
-    assert [(1, 0)] in dag
-    assert [(0, 1), (2, 1), (5, 6), (1, 0)] not in dag
-
-    assert [(0, 1), 2, 0, (2, 1)] in dag
-    assert [(0, 1), 2, (2, 1), 5] not in dag
-    with pytest.raises(TypeError, match='unhashable type: \'list\''):
-        [[0, 1, 2], 0] not in dag
 
 def test_equality():
     dag_a = DAG()
