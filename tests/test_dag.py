@@ -172,6 +172,11 @@ def test_path():
     assert dag.paths(1, 5) == {(1, 5)}
     assert dag.paths(0, 5) == {(0, 1, 5), (0, 3, 5)}
 
+    with pytest.raises(KeyError, match='.* is not in this graph'):
+        dag.paths(0, 7)
+    with pytest.raises(KeyError, match='.* is not in this graph'):
+        dag.paths(8, 7)
+
 #       0
 #     ↙ ↓ ↘
 #    1  2  3

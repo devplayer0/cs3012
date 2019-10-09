@@ -58,6 +58,11 @@ class DAG:
         path.pop()
         return False
     def paths(self, a, b):
+        if a not in self:
+            raise KeyError(f'{a} is not in this graph')
+        if b not in self:
+            raise KeyError(f'{b} is not in this graph')
+
         paths = set()
         self.__paths_impl(a, b, [], paths)
         return paths
