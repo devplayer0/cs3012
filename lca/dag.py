@@ -2,16 +2,16 @@ class DAG:
     def __init__(self):
         self.__vertices = {}
 
-    def vertex(self, v):
+    def add_vertex(self, v):
         if not v in self.__vertices:
             self.__vertices[v] = set()
         return self
 
-    def edge(self, a, b):
+    def add_edge(self, a, b):
         if a not in self.__vertices:
-            self.vertex(a)
+            self.add_vertex(a)
         if b not in self.__vertices:
-            self.vertex(b)
+            self.add_vertex(b)
 
         self.__vertices[a].add(b)
         return self
