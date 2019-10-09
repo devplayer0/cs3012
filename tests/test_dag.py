@@ -30,6 +30,20 @@ def test_construction():
     assert dag.adjacent(2) == {3}
     assert dag.adjacent(4) == set()
 
+def test_operator_construction():
+    dag = DAG()
+    dag[0] = [2, 1]
+    dag[3] = [0, 2, 3, 4]
+
+    assert dag.adjacent(0) == {1, 2}
+    assert dag.adjacent(1) == set()
+    assert dag.adjacent(2) == set()
+    assert dag.adjacent(3) == {4, 3, 2, 0}
+
+    dag[0] = [4, 5]
+    assert dag.adjacent(0) == {4, 5}
+    assert dag.adjacent(3) == {4, 3, 2, 0}
+
 def test_contents():
     dag = DAG()
     dag\
