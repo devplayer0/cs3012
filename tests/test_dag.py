@@ -24,3 +24,21 @@ def test_construction():
     assert dag.adjacent(3) == {0, 2, 4}
     assert dag.adjacent(2) == {3}
     assert dag.adjacent(4) == set()
+
+def test_contents():
+    dag = DAG()
+    dag\
+        .edge(0, 1)\
+        .edge(1, 0)\
+        .edge(2, 1)
+
+    assert dag.contains_vertex(0)
+    assert dag.contains_vertex(2)
+    assert dag.contains_vertex(1)
+    assert not dag.contains_vertex(5)
+
+    assert dag.contains_edge(0, 1)
+    assert dag.contains_edge(2, 1)
+    assert dag.contains_edge(1, 0)
+    assert not dag.contains_edge(1, 2)
+    assert not dag.contains_edge(5, 6)
