@@ -94,6 +94,22 @@ def test_operator_contents():
     with pytest.raises(TypeError, match='unhashable type: \'list\''):
         [[0, 1, 2], 0] not in dag
 
+def test_equality():
+    dag_a = DAG()
+    dag_a[2] = [0, 1]
+    dag_a[0] = [2]
+
+    dag_b = DAG()
+    dag_b[0] = [2]
+    dag_b[2] = [1, 0]
+
+    assert dag_a == dag_b
+    assert dag_b == dag_a
+
+    dag_a[0].add(1)
+    assert dag_a != dag_b
+    assert dag_b != dag_a
+
 def test_deletion():
     dag = DAG()
     dag\
