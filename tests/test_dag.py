@@ -62,6 +62,33 @@ def test_contents():
     assert not dag.contains_edge(1, 2)
     assert not dag.contains_edge(5, 6)
 
+def test_operator_contents():
+    dag = DAG()
+    dag[0] = [1]
+    dag[1] = [0]
+    dag[2] = [1]
+
+    assert 0 in dag
+    assert 2 in dag
+    assert 1 in dag
+    assert 5 not in dag
+
+    assert [0, 2, 1] in dag
+    assert [0, 1] in dag
+    assert [1] in dag
+    assert [0, 2, 1, 5] not in dag
+
+    assert (0, 1) in dag
+    assert (2, 1) in dag
+    assert (1, 0) in dag
+    assert (1, 2) not in dag
+    assert (5, 6) not in dag
+
+    assert [(0, 1), (2, 1), (1, 0)] in dag
+    assert [(2, 1), (1, 0)] in dag
+    assert [(1, 0)] in dag
+    assert [(0, 1), (2, 1), (5, 6), (1, 0)] not in dag
+
 def test_deletion():
     dag = DAG()
     dag\
