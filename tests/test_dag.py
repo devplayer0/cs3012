@@ -17,6 +17,9 @@ def test_construction():
     assert not dag.adjacent(2)
     assert not dag.adjacent(1)
 
+    dag.vertex(0)
+    assert dag.adjacent(0) == {1, 2}
+
     dag\
         .edge(3, 0)\
         .edge(3, 2)\

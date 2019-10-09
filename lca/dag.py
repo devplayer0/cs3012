@@ -3,7 +3,8 @@ class DAG:
         self.__vertices = {}
 
     def vertex(self, v):
-        self.__vertices[v] = set()
+        if not v in self.__vertices:
+            self.__vertices[v] = set()
         return self
 
     def edge(self, a, b):
