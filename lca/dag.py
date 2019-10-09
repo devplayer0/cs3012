@@ -81,3 +81,8 @@ class DAG:
         if not isinstance(other, DAG):
             return NotImplemented
         return self.is_supergraph(other)
+
+    def __str__(self):
+        return str(self.__vertices)
+    def __repr__(self):
+        return f'DAG({self.__vertices})'

@@ -135,6 +135,14 @@ def test_sub_super():
     assert dag_b >= dag_c
     assert not dag_c >= dag_b
 
+def test_str():
+    dag = DAG()
+    dag[0] = [1]
+    dag[1] = [0]
+
+    assert str(dag) == '{0: {1}, 1: {0}}' or str(dag) == '{1: {0}, 0: {1}}'
+    assert repr(dag) == 'DAG({0: {1}, 1: {0}})' or repr(dag) == 'DAG({1: {0}, 0: {1}})'
+
 def test_deletion():
     dag = DAG()
     dag\
