@@ -32,3 +32,10 @@ class DAG:
 
     def remove_edge(self, a, b):
         self.__vertices[a].remove(b)
+
+    def __setitem__(self, v, adjacent):
+        for a in adjacent:
+            self.add_edge(v, a)
+
+    def __getitem__(self, v):
+        return self.adjacent(v)
