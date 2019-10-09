@@ -164,13 +164,13 @@ def test_path():
     dag[1] = [4, 5]
     dag[3] = [5, 6]
 
-    assert dag.paths(0, 2) == {[0, 2]}
+    assert dag.paths(0, 2) == {(0, 2)}
     assert not dag.paths(2, 0)
-    assert dag.paths(0, 0) == {[0]}
-    assert dag.paths(0, 6) == {[0, 3, 6]}
+    assert dag.paths(0, 0) == {(0,)}
+    assert dag.paths(0, 6) == {(0, 3, 6)}
 
-    assert dag.paths(1, 5) == {[1, 5]}
-    assert dag.paths(0, 5) == {[0, 1, 5], [0, 3, 5]}
+    assert dag.paths(1, 5) == {(1, 5)}
+    assert dag.paths(0, 5) == {(0, 1, 5), (0, 3, 5)}
 
 #       0
 #     ↙ ↓ ↘

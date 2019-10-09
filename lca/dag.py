@@ -45,29 +45,22 @@ class DAG:
     def remove_edge(self, a, b):
         self.__vertices[a].remove(b)
 
-    def __path_impl(self, v, dst, path):
+    def __paths_impl(self, v, dst, path, paths):
         path.append(v)
         if v == dst:
             # Base case
-            return True
+            paths.add(tuple(path))
 
         for n in self.adjacent(v):
-            if self.__path_impl(n, dst, path):
-                # Exiting after having found the path
-                return True
+            self.__paths_impl(n, dst, path, paths)
 
         # We'll have to try something else (or give up)
         path.pop()
         return False
-    def path(self, a, b):
-        if a not in self or b not in self:
-            return None
-
-        path = []
-        if self.__path_impl(a, b, path):
-            return path
-        else:
-            return None
+    def paths(self, a, b):
+        paths = set()
+        self.__paths_impl(a, b, [], paths)
+        return paths
 
     def lca(self, root, a, b):
         return None
