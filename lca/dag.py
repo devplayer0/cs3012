@@ -1,3 +1,5 @@
+from collections.abc import Iterable
+
 class DAG:
     def __init__(self):
         self.__vertices = {}
@@ -46,4 +48,9 @@ class DAG:
     def __contains__(self, item):
         if isinstance(item, tuple):
             return self.contains_edge(*item)
+        if isinstance(item, Iterable):
+            for i in item:
+                if not self.__contains__(i):
+                    return False
+            return True
         return self.contains_vertex(item)
