@@ -11,7 +11,7 @@ def test_construction():
     dag\
         .edge(0, 2)\
         .edge(0, 1)
-    assert dag.adjacent(0) == [2, 1]
+    assert dag.adjacent(0) == {1, 2}
     assert not dag.adjacent(2)
     assert not dag.adjacent(1)
 
@@ -21,6 +21,6 @@ def test_construction():
         .edge(2, 3)\
         .edge(3, 4)
 
-    assert dag.adjacent(3) == [0, 2, 4]
-    assert dag.adjacent(2) == [3]
-    assert dag.adjacent(4) == []
+    assert dag.adjacent(3) == {0, 2, 4}
+    assert dag.adjacent(2) == {3}
+    assert dag.adjacent(4) == set()

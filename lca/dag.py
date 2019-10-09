@@ -3,7 +3,7 @@ class DAG:
         self.__nodes = {}
 
     def vertex(self, v):
-        self.__nodes[v] = []
+        self.__nodes[v] = set()
         return self
 
     def edge(self, a, b):
@@ -12,7 +12,7 @@ class DAG:
         if b not in self.__nodes:
             self.vertex(b)
 
-        self.__nodes[a].append(b)
+        self.__nodes[a].add(b)
         return self
 
     def adjacent(self, v):
