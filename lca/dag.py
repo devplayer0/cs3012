@@ -17,3 +17,9 @@ class DAG:
 
     def adjacent(self, v):
         return self.__nodes[v]
+
+    def contains_vertex(self, v):
+        return v in self.__nodes
+
+    def contains_edge(self, a, b):
+        return self.contains_vertex(a) and b in self.__nodes[a]
