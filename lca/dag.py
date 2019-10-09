@@ -26,6 +26,8 @@ class DAG:
 
     def remove_vertex(self, v):
         del self.__nodes[v]
+        for adjacent in self.__nodes.values():
+            adjacent.discard(v)
 
     def remove_edge(self, a, b):
         self.__nodes[a].remove(b)
