@@ -121,6 +121,7 @@ def test_sub_super():
 
     dag_c = DAG()
     dag_c[0] = [2]
+    dag_c[2] = [0]
 
     assert dag_a.is_subgraph(dag_b)
     assert dag_a <= dag_b

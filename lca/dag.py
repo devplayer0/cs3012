@@ -30,11 +30,14 @@ class DAG:
     def is_subgraph(self, other):
         if not isinstance(other, DAG):
             return False
-        return other.__vertices <= self.__vertices
+        for v, a in self.__vertices.items():
+            if v not in other.__vertices or not a <= other.__vertices[v]:
+                return False
+        return True
     def is_supergraph(self, other):
         if not isinstance(other, DAG):
             return False
-        return other.__vertices >= self.__vertices
+        return other.is_subgraph(self)
 
     def remove_vertex(self, v):
         del self.__vertices[v]
