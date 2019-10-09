@@ -34,6 +34,9 @@ class DAG:
         self.__vertices[a].remove(b)
 
     def __setitem__(self, v, adjacent):
+        if v in self.__vertices:
+            self.__vertices[v] = set()
+
         for a in adjacent:
             self.add_edge(v, a)
 
