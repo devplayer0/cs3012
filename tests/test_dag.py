@@ -110,6 +110,31 @@ def test_equality():
     assert dag_a != dag_b
     assert dag_b != dag_a
 
+def test_sub_super():
+    dag_a = DAG()
+    dag_a[2] = [0, 1]
+    dag_a[0] = [2]
+
+    dag_b = DAG()
+    dag_b[0] = [2]
+    dag_b[2] = [1, 0]
+
+    dag_c = DAG()
+    dag_c[0] = [2]
+
+    assert dag_a.is_subgraph(dag_b)
+    assert dag_a <= dag_b
+    assert dag_a.is_supergraph(dag_b)
+    assert dag_a >= dag_b
+
+    assert dag_c <= dag_a
+    assert dag_c <= dag_b
+
+    assert dag_a >= dag_c
+    assert not dag_c >= dag_a
+    assert dag_b >= dag_c
+    assert not dag_c >= dag_b
+
 def test_deletion():
     dag = DAG()
     dag\
