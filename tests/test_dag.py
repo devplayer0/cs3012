@@ -18,7 +18,9 @@ def test_construction():
     dag\
         .edge(3, 0)\
         .edge(3, 2)\
-        .edge(2, 3)
+        .edge(2, 3)\
+        .edge(3, 4)
 
-    assert dag.adjacent(3) == [0, 2]
+    assert dag.adjacent(3) == [0, 2, 4]
     assert dag.adjacent(2) == [3]
+    assert dag.adjacent(4) == []
