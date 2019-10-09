@@ -23,3 +23,9 @@ class DAG:
 
     def contains_edge(self, a, b):
         return self.contains_vertex(a) and b in self.__nodes[a]
+
+    def remove_vertex(self, v):
+        del self.__nodes[v]
+
+    def remove_edge(self, a, b):
+        self.__nodes[a].remove(b)
