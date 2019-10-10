@@ -181,25 +181,27 @@ def test_path():
 
 #        7
 #
-#        0
-#      ↙ ↓ ↘
-#     1  2  3
-#    ↙ ↘   / ↘
-#   4  5 ←/   6
-#  ↙  ↙
-# 8  9
+#        0 ------- 10
+#      ↙ ↓ ↘       |
+#     1  2  3      |
+#    ↙ ↘   / ↘     |
+#   4  5 ←/   6 ←--|
+#  ↙  ↙ ↖          |
+# 8  9   \---------|
 def test_lca():
     dag = DAG()
-    dag[0] = [1, 2, 3]
+    dag[0] = [1, 2, 3, 10]
     dag[1] = [4, 5]
     dag[3] = [5, 6]
     dag[7] = []
     dag[4] = [8]
     dag[5] = [9]
+    dag[10] = [6, 5]
 
     # Basic tests
     assert dag.lca(0, 0, 0) == 0
     assert dag.lca(1, 1, 1) == 1
+    assert dag.lca(0, 5, 5) == 5
     assert dag.lca(0, 1, 2) == 0
     assert dag.lca(0, 1, 3) == 0
     assert dag.lca(0, 2, 3) == 0
@@ -210,7 +212,14 @@ def test_lca():
     assert dag.lca(0, 8, 5) == 1
 
     # Multiple paths
+    assert dag.lca(0, 5, 6) in (3, 10)
+
+    del dag[(10, 6)]
     assert dag.lca(0, 5, 6) == 3
+
+    dag[10].add(6)
+    del dag[(3, 5)]
+    assert dag.lca(0, 5, 6) == 10
 
     # No common ancestors
     assert dag.lca(0, 1, 7) is None
