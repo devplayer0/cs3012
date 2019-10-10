@@ -177,18 +177,38 @@ def test_path():
     with pytest.raises(KeyError, match='.* is not in this graph'):
         dag.paths(8, 7)
 
-#       0
-#     ↙ ↓ ↘
-#    1  2  3
-#   ↙ ↘   / ↘
-#  4  5 ←    6
+#        7
+#
+#        0
+#      ↙ ↓ ↘
+#     1  2  3
+#    ↙ ↘   / ↘
+#   4  5 ←/   6
+#  ↙  ↙
+# 8  9
 def test_lca():
     dag = DAG()
     dag[0] = [1, 2, 3]
     dag[1] = [4, 5]
     dag[3] = [5, 6]
+    dag[7] = []
+    dag[4] = [8]
+    dag[5] = [9]
 
     # Basic tests
+    assert dag.lca(0, 0, 0) == 0
+    assert dag.lca(1, 1, 1) == 1
     assert dag.lca(0, 1, 2) == 0
     assert dag.lca(0, 1, 3) == 0
     assert dag.lca(0, 2, 3) == 0
+    assert dag.lca(1, 4, 5) == 1
+
+    # Differing heights
+    assert dag.lca(0, 4, 2) == 0
+    assert dag.lca(0, 8, 5) == 1
+
+    # Multiple paths
+    assert dag.lca(0, 5, 6) == 3
+
+    # No common ancestors
+    assert dag.lca(0, 1, 7) is None
