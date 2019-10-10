@@ -1,5 +1,3 @@
-import sys
-
 class DAG:
     def __init__(self):
         self.__vertices = {}
@@ -73,10 +71,12 @@ class DAG:
         paths_a = self.paths(root, a)
         paths_b = self.paths(root, b)
 
+        lca_path_len = 0
         lca = None
         # Test all combinations of paths
         for pa in paths_a:
             for pb in paths_b:
+                curr_len = 0
                 curr_lca = None
                 # Traverse along each until a divergence is found
                 for l, r in zip(pa, pb):
@@ -84,10 +84,13 @@ class DAG:
                         # A divergence has been found at this point
                         break
 
+                    curr_len += 1
                     curr_lca = l
 
-                # Did we actually find anything in common between the two paths?
-                if curr_lca is not None:
+                # Did we actually find anything in common between the two paths? If so, check that this path is actually
+                # lower than the last one we found
+                if curr_lca is not None and curr_len > lca_path_len:
+                    lca_path_len = curr_len
                     lca = curr_lca
         return lca
 
