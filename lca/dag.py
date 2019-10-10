@@ -92,7 +92,7 @@ class DAG:
         return lca
 
     def __setitem__(self, v, adjacent):
-        if v in self.__vertices:
+        if v in self.__vertices or not adjacent:
             self.__vertices[v] = set()
 
         for a in adjacent:

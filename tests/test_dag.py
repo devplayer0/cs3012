@@ -34,11 +34,13 @@ def test_operator_construction():
     dag = DAG()
     dag[0] = [2, 1]
     dag[3] = [0, 2, 3, 4]
+    dag[5] = []
 
     assert dag.adjacent(0) == {1, 2}
     assert dag.adjacent(1) == set()
     assert dag.adjacent(2) == set()
     assert dag.adjacent(3) == {4, 3, 2, 0}
+    assert dag.adjacent(5) == set()
 
     dag[0] = [4, 5]
     assert dag.adjacent(0) == {4, 5}
