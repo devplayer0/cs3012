@@ -123,6 +123,18 @@ def test_sub_super():
     assert dag_b >= dag_c
     assert not dag_c >= dag_b
 
+    # For coverage...
+    with pytest.raises(TypeError, match='not a graph'):
+        dag_a.is_subgraph('blah')
+    with pytest.raises(TypeError, match='not a graph'):
+        dag_a.is_supergraph('blah')
+
+    assert dag_a != 'blah'
+    with pytest.raises(TypeError, match="'<=' not supported.*"):
+        dag_a <= 'blah'
+    with pytest.raises(TypeError, match="'>=' not supported.*"):
+        dag_a >= 'blah'
+
 def test_str():
     dag = DAG()
     dag[0] = [1]
