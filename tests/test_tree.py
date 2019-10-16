@@ -1,6 +1,4 @@
-import pytest
-
-from lca import Node
+from lca.tree import Node
 
 def test_assignment():
     root = Node(123)
