@@ -74,7 +74,7 @@ class DAG:
         :returns: True if this graph is a subgraph of another graph
         '''
         if not isinstance(other, DAG):
-            return False
+            raise TypeError('not a graph')
 
         # Have to do a manual outer loop, `<=` with `dict.items()` doesn't go deep enough
         for v, a in self.__vertices.items():
@@ -89,7 +89,7 @@ class DAG:
         :returns: True if this graph is a supergraph of another graph
         '''
         if not isinstance(other, DAG):
-            return False
+            raise TypeError('not a graph')
         return other.is_subgraph(self)
 
     def remove_vertex(self, v):
