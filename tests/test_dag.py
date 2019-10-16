@@ -167,6 +167,23 @@ def test_deletion():
     with pytest.raises(KeyError):
         dag.adjacent(1)
 
+def test_operator_deletion():
+    dag = DAG()
+    dag[0] = [1]
+    dag[1] = [0]
+    dag[2] = [1]
+
+    del dag[(0, 1)]
+    assert (0, 1) not in dag
+    with pytest.raises(KeyError):
+        del dag[(0, 1)]
+
+    del dag[1]
+    assert 1 not in dag
+    with pytest.raises(KeyError):
+        del dag[1]
+    assert (2, 1) not in dag
+
 #       0
 #     ↙ ↓ ↘
 #    1  2  3
