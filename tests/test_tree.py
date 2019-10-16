@@ -1,3 +1,5 @@
+import pytest
+
 from lca.tree import Node
 
 def test_assignment():
@@ -37,6 +39,17 @@ def test_comparison():
 
     assert root != 123
     assert root.left != 456
+
+    # For coverage...
+    with pytest.raises(TypeError, match="'<' not supported.*"):
+        root < 'blah'
+    with pytest.raises(TypeError, match="'<=' not supported.*"):
+        root <= 'blah'
+    assert root != 'blah'
+    with pytest.raises(TypeError, match="'>=' not supported.*"):
+        root >= 'blah'
+    with pytest.raises(TypeError, match="'>' not supported.*"):
+        root > 'blah'
 
 def test_path():
     root = Node(0)
