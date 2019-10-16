@@ -1,16 +1,16 @@
 class Node:
-    """
+    '''
     Class representing a node in a binary tree
 
     :attribute value: the value of the node
     :attribute parent: the parent of the node, if any
     :attribute left: the left child of the node, if any - assigning to this value will set the assigned Node's parent
     :attribute right: the right child of the node, if any - assigning to this value will set the assigned Node's parent
-    """
+    '''
     def __init__(self, value):
-        """
+        '''
         :param value: the value of this node
-        """
+        '''
         self.value = value
 
         self.parent = None
@@ -18,12 +18,12 @@ class Node:
         self.right = None
 
     def path(self, root):
-        """
+        '''
         Retrieve the path from this node to `root` (`root` must be above this Node)
 
         :param root: node at which the traversal of parents will stop
         :returns: a list representing the path of this Node to `root` (including this Node and `root`)
-        """
+        '''
         path = []
         n = self
 
@@ -42,13 +42,13 @@ class Node:
         return path
 
     def lca(self, a, b):
-        """
+        '''
         Find the LCA (Lowest Common Ancestor) from within the tree whose root is this Node.
 
         :param a: first node below the given root
         :param b: second node below the given root
         :returns: the LCA of a and b (or None if no LCA exists)
-        """
+        '''
         a_path = a.path(self)
         b_path = b.path(self)
         # Ensure paths exist
