@@ -188,8 +188,9 @@ class DAG:
         If the vertex is not present, it will be added to the graph
 
         This allows you to create vertices and edges in a more Pythonic manner:
-        - `dag[1] = []` # inserts vertex 1 into the graph
-        - `dag[0] = [1, 2, 3] # creates edges (0, 1), (0, 2) and (0, 3)`
+
+        - :code:`dag[1] = []        # inserts vertex 1 into the graph`
+        - :code:`dag[0] = [1, 2, 3] # creates edges (0, 1), (0, 2) and (0, 3)`
 
         :param a: the starting vertex
         :param b: the ending vertex
@@ -205,7 +206,7 @@ class DAG:
         '''
         Obtain the set of vertices adjacent to this one.
 
-        A more Pythonic version of `adjacent()`.
+        A more Pythonic version of :func:`adjacent()`.
 
         :returns: the set of adjacent vertices
         '''
@@ -215,9 +216,10 @@ class DAG:
         '''
         Remove an edge or vertex from the graph.
 
-        A more Pythonic version of `remove_edge()` and `remove_vertex()`.
+        A more Pythonic version of :func:`remove_edge()` and :func:`remove_vertex()`.
 
-        To delete a vertex, do `del dag[vertex]`. To delete an edge, do `del dag[(a, b)]`.
+        - To delete a vertex, do :code:`del dag[vertex]`
+        - To delete an edge, do :code:`del dag[(a, b)]`
         '''
         if isinstance(item, tuple):
             self.remove_edge(*item)
@@ -228,9 +230,10 @@ class DAG:
         '''
         Check if the directed edge or vertex is present in the graph.
 
-        A more Pythonic version of `contains_edge()` and `contains_vertex()`.
+        A more Pythonic version of :func:`contains_edge()` and :func:`contains_vertex()`.
 
-        To check a vertex, do `vertex in dag`. To check for an edge, do `(a, b) in dag`.
+        - To check a vertex, do :code:`vertex in dag`
+        - To check for an edge, do :code:`(a, b) in dag`
 
         :returns: True if the directed edge or vertex is in the graph
         '''
@@ -239,23 +242,30 @@ class DAG:
         return self.contains_vertex(item)
 
     def __eq__(self, other):
+        '''
+        Check if the nodes and edges in this :class:`DAG` are equal to those in another :class:`DAG`.
+
+        :returns: False if `other` is not a :class:`DAG`
+        '''
         if not isinstance(other, DAG):
             return NotImplemented
         # Will test equality for keys (vertices) and values (adjacency sets - `__eq__()` _will_ do a proper comparison)
         return other.__vertices == self.__vertices
 
     def __le__(self, other):
-        '''Check if this graph is a subgraph of another, Pythonic-ally.'''
+        '''Check if this graph is a subgraph of another, Pythonic-ally. (:code:`sub <= super_`)'''
         if not isinstance(other, DAG):
             return NotImplemented
         return self.is_subgraph(other)
     def __ge__(self, other):
-        '''Check if this graph is a supergraph of another, Pythonic-ally.'''
+        '''Check if this graph is a supergraph of another, Pythonic-ally. (:code:`super_ >= sub`)'''
         if not isinstance(other, DAG):
             return NotImplemented
         return self.is_supergraph(other)
 
     def __str__(self):
+        '''Get the string representation of this :class:`DAG`'s nodes and edges.'''
         return str(self.__vertices)
     def __repr__(self):
+        '''Get the debuggable string representation of this :class:`DAG`'s nodes and edges.'''
         return f'DAG({self.__vertices})'
