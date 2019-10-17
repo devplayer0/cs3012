@@ -37,8 +37,8 @@
 
 <span class="sd">    :attribute value: the value of the node</span>
 <span class="sd">    :attribute parent: the parent of the node, if any</span>
-<span class="sd">    :attribute left: the left child of the node, if any - assigning to this value will set the assigned Node&#39;s parent</span>
-<span class="sd">    :attribute right: the right child of the node, if any - assigning to this value will set the assigned Node&#39;s parent</span>
+<span class="sd">    :attribute left: the left child of the node, if any - assigning to this value will set the assigned node&#39;s parent</span>
+<span class="sd">    :attribute right: the right child of the node, if any - assigning to this value will set the assigned node&#39;s parent</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="Node.__init__"><a class="viewcode-back" href="../../tree.html#lca.tree.Node.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -52,10 +52,10 @@
 
 <div class="viewcode-block" id="Node.path"><a class="viewcode-back" href="../../tree.html#lca.tree.Node.path">[docs]</a>    <span class="k">def</span> <span class="nf">path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Retrieve the path from this node to `root` (`root` must be above this Node)</span>
+<span class="sd">        Retrieve the path from this node to `root` (`root` must be above this :class:`Node`)</span>
 
 <span class="sd">        :param root: node at which the traversal of parents will stop</span>
-<span class="sd">        :returns: a list representing the path of this Node to `root` (including this Node and `root`)</span>
+<span class="sd">        :returns: a list representing the path of this Node to `root` (including this :class:`Node` and `root`)</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span>
@@ -75,13 +75,13 @@
         <span class="k">return</span> <span class="n">path</span></div>
 
 <div class="viewcode-block" id="Node.lca"><a class="viewcode-back" href="../../tree.html#lca.tree.Node.lca">[docs]</a>    <span class="k">def</span> <span class="nf">lca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Find the LCA (Lowest Common Ancestor) from within the tree whose root is this Node.</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Find the LCA (Lowest Common Ancestor) from within the tree whose root is this :class:`Node`.</span>
 
 <span class="sd">        :param a: first node below the given root</span>
 <span class="sd">        :param b: second node below the given root</span>
 <span class="sd">        :returns: the LCA of a and b (or None if no LCA exists)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">a_path</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">b_path</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="c1"># Ensure paths exist</span>
@@ -109,30 +109,57 @@
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="Node.__lt__"><a class="viewcode-back" href="../../tree.html#lca.tree.Node.__lt__">[docs]</a>    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if this node&#39;s value is less than that of another node. (:code:`node_a &lt; node_b`)</span>
+
+<span class="sd">        :returns: False if `other` is not a :class:`Node`.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Node</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span></div>
 <div class="viewcode-block" id="Node.__le__"><a class="viewcode-back" href="../../tree.html#lca.tree.Node.__le__">[docs]</a>    <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if this node&#39;s value is less than or equal to that of another node. (:code:`node_a &lt;= node_b`)</span>
+
+<span class="sd">        :returns: False if `other` is not a :class:`Node`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Node</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span></div>
 <div class="viewcode-block" id="Node.__eq__"><a class="viewcode-back" href="../../tree.html#lca.tree.Node.__eq__">[docs]</a>    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if this node&#39;s value is equal to that of another node. (:code:`node_a == node_b`)</span>
+
+<span class="sd">        :returns: False if `other` is not a :class:`Node`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Node</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span></div>
 <div class="viewcode-block" id="Node.__ge__"><a class="viewcode-back" href="../../tree.html#lca.tree.Node.__ge__">[docs]</a>    <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if this node&#39;s value is greater than or equal to that of another node. (:code:`node_a &gt;= node_b`)</span>
+
+<span class="sd">        :returns: False if `other` is not a :class:`Node`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Node</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span></div>
 <div class="viewcode-block" id="Node.__gt__"><a class="viewcode-back" href="../../tree.html#lca.tree.Node.__gt__">[docs]</a>    <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if this node&#39;s value is greater than to that of another node. (:code:`node_a &gt; node_b`)</span>
+
+<span class="sd">        :returns: False if `other` is not a :class:`Node`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Node</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span></div>
 
 <div class="viewcode-block" id="Node.__str__"><a class="viewcode-back" href="../../tree.html#lca.tree.Node.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Get the string representation of this node&#39;s value.&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
 <div class="viewcode-block" id="Node.__repr__"><a class="viewcode-back" href="../../tree.html#lca.tree.Node.__repr__">[docs]</a>    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;Node(</span><span class="si">{self.value}</span><span class="s1">)&#39;</span></div></div>
+        <span class="sd">&#39;&#39;&#39;Get the debuggable string representation of this node&#39;s value.&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;Node({repr(self.value)})&#39;</span></div></div>
 </pre></div>
 
           </div>

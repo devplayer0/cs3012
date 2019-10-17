@@ -46,28 +46,43 @@
 <dd class="field-even"><p>the parent of the node, if any</p>
 </dd>
 <dt class="field-odd">Attribute left</dt>
-<dd class="field-odd"><p>the left child of the node, if any - assigning to this value will set the assigned Node’s parent</p>
+<dd class="field-odd"><p>the left child of the node, if any - assigning to this value will set the assigned node’s parent</p>
 </dd>
 <dt class="field-even">Attribute right</dt>
-<dd class="field-even"><p>the right child of the node, if any - assigning to this value will set the assigned Node’s parent</p>
+<dd class="field-even"><p>the right child of the node, if any - assigning to this value will set the assigned node’s parent</p>
 </dd>
 </dl>
 <dl class="method">
 <dt id="lca.tree.Node.__eq__">
 <code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__eq__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return self==value.</p>
+<dd><p>Check if this node’s value is equal to that of another node. (<code class="code docutils literal notranslate"><span class="pre">node_a</span> <span class="pre">==</span> <span class="pre">node_b</span></code>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>False if <cite>other</cite> is not a <a class="reference internal" href="#lca.tree.Node" title="lca.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="lca.tree.Node.__ge__">
 <code class="sig-name descname">__ge__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__ge__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__ge__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return self&gt;=value.</p>
+<dd><p>Check if this node’s value is greater than or equal to that of another node. (<code class="code docutils literal notranslate"><span class="pre">node_a</span> <span class="pre">&gt;=</span> <span class="pre">node_b</span></code>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>False if <cite>other</cite> is not a <a class="reference internal" href="#lca.tree.Node" title="lca.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="lca.tree.Node.__gt__">
 <code class="sig-name descname">__gt__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__gt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__gt__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return self&gt;value.</p>
+<dd><p>Check if this node’s value is greater than to that of another node. (<code class="code docutils literal notranslate"><span class="pre">node_a</span> <span class="pre">&gt;</span> <span class="pre">node_b</span></code>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>False if <cite>other</cite> is not a <a class="reference internal" href="#lca.tree.Node" title="lca.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -83,31 +98,41 @@
 <dl class="method">
 <dt id="lca.tree.Node.__le__">
 <code class="sig-name descname">__le__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__le__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__le__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return self&lt;=value.</p>
+<dd><p>Check if this node’s value is less than or equal to that of another node. (<code class="code docutils literal notranslate"><span class="pre">node_a</span> <span class="pre">&lt;=</span> <span class="pre">node_b</span></code>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>False if <cite>other</cite> is not a <a class="reference internal" href="#lca.tree.Node" title="lca.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="lca.tree.Node.__lt__">
 <code class="sig-name descname">__lt__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__lt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__lt__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return self&lt;value.</p>
+<dd><p>Check if this node’s value is less than that of another node. (<code class="code docutils literal notranslate"><span class="pre">node_a</span> <span class="pre">&lt;</span> <span class="pre">node_b</span></code>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>False if <cite>other</cite> is not a <a class="reference internal" href="#lca.tree.Node" title="lca.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="lca.tree.Node.__repr__">
 <code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__repr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return repr(self).</p>
+<dd><p>Get the debuggable string representation of this node’s value.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="lca.tree.Node.__str__">
 <code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__str__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return str(self).</p>
+<dd><p>Get the string representation of this node’s value.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="lca.tree.Node.lca">
 <code class="sig-name descname">lca</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.lca"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.lca" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find the LCA (Lowest Common Ancestor) from within the tree whose root is this Node.</p>
+<dd><p>Find the LCA (Lowest Common Ancestor) from within the tree whose root is this <a class="reference internal" href="#lca.tree.Node" title="lca.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -124,13 +149,13 @@
 <dl class="method">
 <dt id="lca.tree.Node.path">
 <code class="sig-name descname">path</code><span class="sig-paren">(</span><em class="sig-param">root</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve the path from this node to <cite>root</cite> (<cite>root</cite> must be above this Node)</p>
+<dd><p>Retrieve the path from this node to <cite>root</cite> (<cite>root</cite> must be above this <a class="reference internal" href="#lca.tree.Node" title="lca.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>root</strong> – node at which the traversal of parents will stop</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list representing the path of this Node to <cite>root</cite> (including this Node and <cite>root</cite>)</p>
+<dd class="field-even"><p>a list representing the path of this Node to <cite>root</cite> (including this <a class="reference internal" href="#lca.tree.Node" title="lca.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a> and <cite>root</cite>)</p>
 </dd>
 </dl>
 </dd></dl>

@@ -221,8 +221,9 @@
 <span class="sd">        If the vertex is not present, it will be added to the graph</span>
 
 <span class="sd">        This allows you to create vertices and edges in a more Pythonic manner:</span>
-<span class="sd">        - `dag[1] = []` # inserts vertex 1 into the graph</span>
-<span class="sd">        - `dag[0] = [1, 2, 3] # creates edges (0, 1), (0, 2) and (0, 3)`</span>
+
+<span class="sd">        - :code:`dag[1] = []        # inserts vertex 1 into the graph`</span>
+<span class="sd">        - :code:`dag[0] = [1, 2, 3] # creates edges (0, 1), (0, 2) and (0, 3)`</span>
 
 <span class="sd">        :param a: the starting vertex</span>
 <span class="sd">        :param b: the ending vertex</span>
@@ -238,7 +239,7 @@
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Obtain the set of vertices adjacent to this one.</span>
 
-<span class="sd">        A more Pythonic version of `adjacent()`.</span>
+<span class="sd">        A more Pythonic version of :func:`adjacent()`.</span>
 
 <span class="sd">        :returns: the set of adjacent vertices</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -248,9 +249,10 @@
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Remove an edge or vertex from the graph.</span>
 
-<span class="sd">        A more Pythonic version of `remove_edge()` and `remove_vertex()`.</span>
+<span class="sd">        A more Pythonic version of :func:`remove_edge()` and :func:`remove_vertex()`.</span>
 
-<span class="sd">        To delete a vertex, do `del dag[vertex]`. To delete an edge, do `del dag[(a, b)]`.</span>
+<span class="sd">        - To delete a vertex, do :code:`del dag[vertex]`</span>
+<span class="sd">        - To delete an edge, do :code:`del dag[(a, b)]`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="o">*</span><span class="n">item</span><span class="p">)</span>
@@ -261,9 +263,10 @@
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Check if the directed edge or vertex is present in the graph.</span>
 
-<span class="sd">        A more Pythonic version of `contains_edge()` and `contains_vertex()`.</span>
+<span class="sd">        A more Pythonic version of :func:`contains_edge()` and :func:`contains_vertex()`.</span>
 
-<span class="sd">        To check a vertex, do `vertex in dag`. To check for an edge, do `(a, b) in dag`.</span>
+<span class="sd">        - To check a vertex, do :code:`vertex in dag`</span>
+<span class="sd">        - To check for an edge, do :code:`(a, b) in dag`</span>
 
 <span class="sd">        :returns: True if the directed edge or vertex is in the graph</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -272,25 +275,32 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains_vertex</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DAG.__eq__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__eq__">[docs]</a>    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if the nodes and edges in this :class:`DAG` are equal to those in another :class:`DAG`.</span>
+
+<span class="sd">        :returns: False if `other` is not a :class:`DAG`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">DAG</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="c1"># Will test equality for keys (vertices) and values (adjacency sets - `__eq__()` _will_ do a proper comparison)</span>
         <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">__vertices</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span></div>
 
 <div class="viewcode-block" id="DAG.__le__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__le__">[docs]</a>    <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Check if this graph is a subgraph of another, Pythonic-ally.&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;Check if this graph is a subgraph of another, Pythonic-ally. (:code:`sub &lt;= super_`)&#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">DAG</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_subgraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 <div class="viewcode-block" id="DAG.__ge__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__ge__">[docs]</a>    <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Check if this graph is a supergraph of another, Pythonic-ally.&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;Check if this graph is a supergraph of another, Pythonic-ally. (:code:`super_ &gt;= sub`)&#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">DAG</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_supergraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DAG.__str__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Get the string representation of this :class:`DAG`&#39;s nodes and edges.&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="p">)</span></div>
 <div class="viewcode-block" id="DAG.__repr__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__repr__">[docs]</a>    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Get the debuggable string representation of this :class:`DAG`&#39;s nodes and edges.&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;DAG(</span><span class="si">{self.__vertices}</span><span class="s1">)&#39;</span></div></div>
 </pre></div>
 

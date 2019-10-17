@@ -42,8 +42,11 @@
 <dt id="lca.dag.DAG.__contains__">
 <code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/dag.html#DAG.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.dag.DAG.__contains__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the directed edge or vertex is present in the graph.</p>
-<p>A more Pythonic version of <cite>contains_edge()</cite> and <cite>contains_vertex()</cite>.</p>
-<p>To check a vertex, do <cite>vertex in dag</cite>. To check for an edge, do <cite>(a, b) in dag</cite>.</p>
+<p>A more Pythonic version of <a class="reference internal" href="#lca.dag.DAG.contains_edge" title="lca.dag.DAG.contains_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">contains_edge()</span></code></a> and <a class="reference internal" href="#lca.dag.DAG.contains_vertex" title="lca.dag.DAG.contains_vertex"><code class="xref py py-func docutils literal notranslate"><span class="pre">contains_vertex()</span></code></a>.</p>
+<ul class="simple">
+<li><p>To check a vertex, do <code class="code docutils literal notranslate"><span class="pre">vertex</span> <span class="pre">in</span> <span class="pre">dag</span></code></p></li>
+<li><p>To check for an edge, do <code class="code docutils literal notranslate"><span class="pre">(a,</span> <span class="pre">b)</span> <span class="pre">in</span> <span class="pre">dag</span></code></p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>True if the directed edge or vertex is in the graph</p>
@@ -55,27 +58,35 @@
 <dt id="lca.dag.DAG.__delitem__">
 <code class="sig-name descname">__delitem__</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/dag.html#DAG.__delitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.dag.DAG.__delitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove an edge or vertex from the graph.</p>
-<p>A more Pythonic version of <cite>remove_edge()</cite> and <cite>remove_vertex()</cite>.</p>
-<p>To delete a vertex, do <cite>del dag[vertex]</cite>. To delete an edge, do <cite>del dag[(a, b)]</cite>.</p>
+<p>A more Pythonic version of <a class="reference internal" href="#lca.dag.DAG.remove_edge" title="lca.dag.DAG.remove_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">remove_edge()</span></code></a> and <a class="reference internal" href="#lca.dag.DAG.remove_vertex" title="lca.dag.DAG.remove_vertex"><code class="xref py py-func docutils literal notranslate"><span class="pre">remove_vertex()</span></code></a>.</p>
+<ul class="simple">
+<li><p>To delete a vertex, do <code class="code docutils literal notranslate"><span class="pre">del</span> <span class="pre">dag[vertex]</span></code></p></li>
+<li><p>To delete an edge, do <code class="code docutils literal notranslate"><span class="pre">del</span> <span class="pre">dag[(a,</span> <span class="pre">b)]</span></code></p></li>
+</ul>
 </dd></dl>
 
 <dl class="method">
 <dt id="lca.dag.DAG.__eq__">
 <code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/dag.html#DAG.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.dag.DAG.__eq__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return self==value.</p>
+<dd><p>Check if the nodes and edges in this <a class="reference internal" href="#lca.dag.DAG" title="lca.dag.DAG"><code class="xref py py-class docutils literal notranslate"><span class="pre">DAG</span></code></a> are equal to those in another <a class="reference internal" href="#lca.dag.DAG" title="lca.dag.DAG"><code class="xref py py-class docutils literal notranslate"><span class="pre">DAG</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>False if <cite>other</cite> is not a <a class="reference internal" href="#lca.dag.DAG" title="lca.dag.DAG"><code class="xref py py-class docutils literal notranslate"><span class="pre">DAG</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="lca.dag.DAG.__ge__">
 <code class="sig-name descname">__ge__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/dag.html#DAG.__ge__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.dag.DAG.__ge__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if this graph is a supergraph of another, Pythonic-ally.</p>
+<dd><p>Check if this graph is a supergraph of another, Pythonic-ally. (<code class="code docutils literal notranslate"><span class="pre">super_</span> <span class="pre">&gt;=</span> <span class="pre">sub</span></code>)</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="lca.dag.DAG.__getitem__">
 <code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/dag.html#DAG.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.dag.DAG.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain the set of vertices adjacent to this one.</p>
-<p>A more Pythonic version of <cite>adjacent()</cite>.</p>
+<p>A more Pythonic version of <a class="reference internal" href="#lca.dag.DAG.adjacent" title="lca.dag.DAG.adjacent"><code class="xref py py-func docutils literal notranslate"><span class="pre">adjacent()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>the set of adjacent vertices</p>
@@ -86,13 +97,13 @@
 <dl class="method">
 <dt id="lca.dag.DAG.__le__">
 <code class="sig-name descname">__le__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/dag.html#DAG.__le__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.dag.DAG.__le__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if this graph is a subgraph of another, Pythonic-ally.</p>
+<dd><p>Check if this graph is a subgraph of another, Pythonic-ally. (<code class="code docutils literal notranslate"><span class="pre">sub</span> <span class="pre">&lt;=</span> <span class="pre">super_</span></code>)</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="lca.dag.DAG.__repr__">
 <code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/dag.html#DAG.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.dag.DAG.__repr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return repr(self).</p>
+<dd><p>Get the debuggable string representation of this <a class="reference internal" href="#lca.dag.DAG" title="lca.dag.DAG"><code class="xref py py-class docutils literal notranslate"><span class="pre">DAG</span></code></a>’s nodes and edges.</p>
 </dd></dl>
 
 <dl class="method">
@@ -100,9 +111,11 @@
 <code class="sig-name descname">__setitem__</code><span class="sig-paren">(</span><em class="sig-param">v</em>, <em class="sig-param">adjacent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/dag.html#DAG.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.dag.DAG.__setitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the adjacency list for a vertex.</p>
 <p>If the vertex is not present, it will be added to the graph</p>
-<p>This allows you to create vertices and edges in a more Pythonic manner:
-- <cite>dag[1] = []</cite> # inserts vertex 1 into the graph
-- <cite>dag[0] = [1, 2, 3] # creates edges (0, 1), (0, 2) and (0, 3)</cite></p>
+<p>This allows you to create vertices and edges in a more Pythonic manner:</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">dag[1]</span> <span class="pre">=</span> <span class="pre">[]</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">#</span> <span class="pre">inserts</span> <span class="pre">vertex</span> <span class="pre">1</span> <span class="pre">into</span> <span class="pre">the</span> <span class="pre">graph</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">dag[0]</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span> <span class="pre">#</span> <span class="pre">creates</span> <span class="pre">edges</span> <span class="pre">(0,</span> <span class="pre">1),</span> <span class="pre">(0,</span> <span class="pre">2)</span> <span class="pre">and</span> <span class="pre">(0,</span> <span class="pre">3)</span></code></p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -119,7 +132,7 @@
 <dl class="method">
 <dt id="lca.dag.DAG.__str__">
 <code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/dag.html#DAG.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.dag.DAG.__str__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return str(self).</p>
+<dd><p>Get the string representation of this <a class="reference internal" href="#lca.dag.DAG" title="lca.dag.DAG"><code class="xref py py-class docutils literal notranslate"><span class="pre">DAG</span></code></a>’s nodes and edges.</p>
 </dd></dl>
 
 <dl class="method">
