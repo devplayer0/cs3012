@@ -28,7 +28,6 @@ jobs:
         run: |
           cd docs/
           make html
-          touch build/html/.nojekyll
 
       - name: Generate test report
         run: pytest --html=docs/build/html/tests.html --self-contained-html || true
