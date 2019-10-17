@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>lca.dag &#8212; Software Engineering (CS3012)  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for lca.dag</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="DAG"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG">[docs]</a><span></span><span class="k">class</span> <span class="nc">DAG</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Class representing a Directed Acyclic Graph.</span>
+
+<span class="sd">    Note: it is up to the user to ensure the graph contains no cycles</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="DAG.add_vertex"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.add_vertex">[docs]</a>    <span class="k">def</span> <span class="nf">add_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Add a new vertex to the graph.</span>
+
+<span class="sd">        Does nothing if the vertex is already in the graph.</span>
+
+<span class="sd">        :param v: the new vertex to add</span>
+<span class="sd">        :returns: this object (for method chaining)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="DAG.add_edge"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.add_edge">[docs]</a>    <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Add a new directed edge to the graph.</span>
+
+<span class="sd">        Adds vertices to the graph if they are not already present.</span>
+
+<span class="sd">        :param a: the starting vertex</span>
+<span class="sd">        :param b: the ending vertex</span>
+<span class="sd">        :returns: this object (for method chaining)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Create vertices if they are not already present</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="DAG.adjacent"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.adjacent">[docs]</a>    <span class="k">def</span> <span class="nf">adjacent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Obtain the set of vertices adjacent (connected by an edge of which this vertex is the start) to this vertex</span>
+
+<span class="sd">        :param v: a vertex in the graph</span>
+<span class="sd">        :returns: the set of adjacent vertices</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="p">[</span><span class="n">v</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAG.contains_vertex"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.contains_vertex">[docs]</a>    <span class="k">def</span> <span class="nf">contains_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if the vertex is present in the graph.</span>
+
+<span class="sd">        :returns: True if the vertex is in the graph</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span></div>
+
+<div class="viewcode-block" id="DAG.contains_edge"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.contains_edge">[docs]</a>    <span class="k">def</span> <span class="nf">contains_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if the directed edge is present in the graph.</span>
+
+<span class="sd">        :param a: the starting vertex</span>
+<span class="sd">        :param b: the ending vertex</span>
+<span class="sd">        :returns: True if the directed edge is in the graph</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains_vertex</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">and</span> <span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="p">[</span><span class="n">a</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAG.is_subgraph"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.is_subgraph">[docs]</a>    <span class="k">def</span> <span class="nf">is_subgraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if this graph is a subgraph of another.</span>
+
+<span class="sd">        :param other: the supergraph</span>
+<span class="sd">        :returns: True if this graph is a subgraph of another graph</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">DAG</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;not a graph&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Have to do a manual outer loop, `&lt;=` with `dict.items()` doesn&#39;t go deep enough</span>
+        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">__vertices</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">__vertices</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+<div class="viewcode-block" id="DAG.is_supergraph"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.is_supergraph">[docs]</a>    <span class="k">def</span> <span class="nf">is_supergraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if this graph is a supergraph of another.</span>
+
+<span class="sd">        :param other: the subgraph</span>
+<span class="sd">        :returns: True if this graph is a supergraph of another graph</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">DAG</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;not a graph&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">is_subgraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAG.remove_vertex"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.remove_vertex">[docs]</a>    <span class="k">def</span> <span class="nf">remove_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Remove a vertex (and any connected edges) from the graph.</span>
+
+<span class="sd">        :param vertex: the vertex to remove from the graph</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">adjacent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="c1"># `remove() will raise `KeyError`</span>
+            <span class="n">adjacent</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAG.remove_edge"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.remove_edge">[docs]</a>    <span class="k">def</span> <span class="nf">remove_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Remove a directed edge from the graph.</span>
+
+<span class="sd">        Vertices will never be removed, even if they become pendant.</span>
+
+<span class="sd">        :param a: the starting vertex</span>
+<span class="sd">        :param b: the ending vertex</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">b</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__paths_impl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">paths</span><span class="p">):</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="n">dst</span><span class="p">:</span>
+            <span class="c1"># Base case</span>
+            <span class="n">paths</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacent</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__paths_impl</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">paths</span><span class="p">)</span>
+
+        <span class="c1"># We&#39;ll have to try something else (or give up)</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">False</span>
+<div class="viewcode-block" id="DAG.paths"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.paths">[docs]</a>    <span class="k">def</span> <span class="nf">paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Find paths from vertex `a` to vertex `b` in the graph.</span>
+
+<span class="sd">        A set of tuples (each tuple representing a single path) is returned.</span>
+
+<span class="sd">        :param a: the starting vertex</span>
+<span class="sd">        :param b: the ending vertex</span>
+<span class="sd">        :returns: a set of paths</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{a}</span><span class="s1"> is not in this graph&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{b}</span><span class="s1"> is not in this graph&#39;</span><span class="p">)</span>
+
+        <span class="n">paths</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__paths_impl</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="p">[],</span> <span class="n">paths</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">paths</span></div>
+
+<div class="viewcode-block" id="DAG.lca"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.lca">[docs]</a>    <span class="k">def</span> <span class="nf">lca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Find the lowest common ancestor of `a` and `b` below `root`.</span>
+
+<span class="sd">        If multiple lowest common ancestors are valid (same depth), the one which is returned is non-deterministic.</span>
+
+<span class="sd">        :param a: the starting vertex</span>
+<span class="sd">        :param b: the ending vertex</span>
+<span class="sd">        :returns: the lowest common ancestor, if any</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">paths_a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+        <span class="n">paths_b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+        <span class="n">lca_path_len</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">lca</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># Test all combinations of paths</span>
+        <span class="k">for</span> <span class="n">pa</span> <span class="ow">in</span> <span class="n">paths_a</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">pb</span> <span class="ow">in</span> <span class="n">paths_b</span><span class="p">:</span>
+                <span class="n">curr_len</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">curr_lca</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="c1"># Traverse along each until a divergence is found</span>
+                <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pa</span><span class="p">,</span> <span class="n">pb</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">l</span> <span class="o">!=</span> <span class="n">r</span><span class="p">:</span>
+                        <span class="c1"># A divergence has been found at this point</span>
+                        <span class="k">break</span>
+
+                    <span class="n">curr_len</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">curr_lca</span> <span class="o">=</span> <span class="n">l</span>
+
+                <span class="c1"># Did we actually find anything in common between the two paths? If so, check that this path is actually</span>
+                <span class="c1"># lower than the last one we found</span>
+                <span class="k">if</span> <span class="n">curr_lca</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">curr_len</span> <span class="o">&gt;</span> <span class="n">lca_path_len</span><span class="p">:</span>
+                    <span class="n">lca_path_len</span> <span class="o">=</span> <span class="n">curr_len</span>
+                    <span class="n">lca</span> <span class="o">=</span> <span class="n">curr_lca</span>
+        <span class="k">return</span> <span class="n">lca</span></div>
+
+<div class="viewcode-block" id="DAG.__setitem__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__setitem__">[docs]</a>    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">adjacent</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Set the adjacency list for a vertex.</span>
+
+<span class="sd">        If the vertex is not present, it will be added to the graph</span>
+
+<span class="sd">        This allows you to create vertices and edges in a more Pythonic manner:</span>
+<span class="sd">        - `dag[1] = []` # inserts vertex 1 into the graph</span>
+<span class="sd">        - `dag[0] = [1, 2, 3] # creates edges (0, 1), (0, 2) and (0, 3)`</span>
+
+<span class="sd">        :param a: the starting vertex</span>
+<span class="sd">        :param b: the ending vertex</span>
+<span class="sd">        :returns: the lowest common ancestor, if any</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">adjacent</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">adjacent</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAG.__getitem__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__getitem__">[docs]</a>    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Obtain the set of vertices adjacent to this one.</span>
+
+<span class="sd">        A more Pythonic version of `adjacent()`.</span>
+
+<span class="sd">        :returns: the set of adjacent vertices</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacent</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAG.__delitem__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__delitem__">[docs]</a>    <span class="k">def</span> <span class="nf">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Remove an edge or vertex from the graph.</span>
+
+<span class="sd">        A more Pythonic version of `remove_edge()` and `remove_vertex()`.</span>
+
+<span class="sd">        To delete a vertex, do `del dag[vertex]`. To delete an edge, do `del dag[(a, b)]`.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="o">*</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove_vertex</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAG.__contains__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__contains__">[docs]</a>    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if the directed edge or vertex is present in the graph.</span>
+
+<span class="sd">        A more Pythonic version of `contains_edge()` and `contains_vertex()`.</span>
+
+<span class="sd">        To check a vertex, do `vertex in dag`. To check for an edge, do `(a, b) in dag`.</span>
+
+<span class="sd">        :returns: True if the directed edge or vertex is in the graph</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains_edge</span><span class="p">(</span><span class="o">*</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains_vertex</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAG.__eq__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__eq__">[docs]</a>    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">DAG</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="c1"># Will test equality for keys (vertices) and values (adjacency sets - `__eq__()` _will_ do a proper comparison)</span>
+        <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">__vertices</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span></div>
+
+<div class="viewcode-block" id="DAG.__le__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__le__">[docs]</a>    <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Check if this graph is a subgraph of another, Pythonic-ally.&#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">DAG</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_subgraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
+<div class="viewcode-block" id="DAG.__ge__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__ge__">[docs]</a>    <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Check if this graph is a supergraph of another, Pythonic-ally.&#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">DAG</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_supergraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAG.__str__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__vertices</span><span class="p">)</span></div>
+<div class="viewcode-block" id="DAG.__repr__"><a class="viewcode-back" href="../../dag.html#lca.dag.DAG.__repr__">[docs]</a>    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;DAG(</span><span class="si">{self.__vertices}</span><span class="s1">)&#39;</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Software Engineering (CS3012)</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Documentation pages:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tree.html">LCA in a binary tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dag.html">LCA in a directed acyclic graph (DAG)</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jack O'Sullivan.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

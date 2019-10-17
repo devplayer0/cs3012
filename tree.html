@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>LCA in a binary tree &#8212; Software Engineering (CS3012)  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LCA in a directed acyclic graph (DAG)" href="dag.html" />
+    <link rel="prev" title="Software Engineering (CS3012)" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-lca.tree">
+<span id="lca-in-a-binary-tree"></span><h1>LCA in a binary tree<a class="headerlink" href="#module-lca.tree" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="lca.tree.Node">
+<em class="property">class </em><code class="sig-prename descclassname">lca.tree.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class representing a node in a binary tree</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attribute value</dt>
+<dd class="field-odd"><p>the value of the node</p>
+</dd>
+<dt class="field-even">Attribute parent</dt>
+<dd class="field-even"><p>the parent of the node, if any</p>
+</dd>
+<dt class="field-odd">Attribute left</dt>
+<dd class="field-odd"><p>the left child of the node, if any - assigning to this value will set the assigned Node’s parent</p>
+</dd>
+<dt class="field-even">Attribute right</dt>
+<dd class="field-even"><p>the right child of the node, if any - assigning to this value will set the assigned Node’s parent</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="lca.tree.Node.__eq__">
+<code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__ge__">
+<code class="sig-name descname">__ge__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__ge__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__ge__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self&gt;=value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__gt__">
+<code class="sig-name descname">__gt__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__gt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__gt__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self&gt;value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – the value of this node</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__le__">
+<code class="sig-name descname">__le__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__le__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__le__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self&lt;=value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__lt__">
+<code class="sig-name descname">__lt__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__lt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__lt__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self&lt;value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__repr__">
+<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return repr(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.lca">
+<code class="sig-name descname">lca</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.lca"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.lca" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the LCA (Lowest Common Ancestor) from within the tree whose root is this Node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – first node below the given root</p></li>
+<li><p><strong>b</strong> – second node below the given root</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the LCA of a and b (or None if no LCA exists)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.path">
+<code class="sig-name descname">path</code><span class="sig-paren">(</span><em class="sig-param">root</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the path from this node to <cite>root</cite> (<cite>root</cite> must be above this Node)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>root</strong> – node at which the traversal of parents will stop</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list representing the path of this Node to <cite>root</cite> (including this Node and <cite>root</cite>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Software Engineering (CS3012)</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Documentation pages:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">LCA in a binary tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dag.html">LCA in a directed acyclic graph (DAG)</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Software Engineering (CS3012)</a></li>
+      <li>Next: <a href="dag.html" title="next chapter">LCA in a directed acyclic graph (DAG)</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jack O'Sullivan.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/tree.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
