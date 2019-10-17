@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Software Engineering (CS3012) &#8212; Software Engineering (CS3012)  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="software-engineering-cs3012">
+<h1>Software Engineering (CS3012)<a class="headerlink" href="#software-engineering-cs3012" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="module-lca.tree">
+<span id="lca-in-a-binary-tree"></span><h1>LCA in a binary tree<a class="headerlink" href="#module-lca.tree" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="lca.tree.Node">
+<em class="property">class </em><code class="sig-prename descclassname">lca.tree.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.tree.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class representing a node in a binary tree</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attribute value</dt>
+<dd class="field-odd"><p>the value of the node</p>
+</dd>
+<dt class="field-even">Attribute parent</dt>
+<dd class="field-even"><p>the parent of the node, if any</p>
+</dd>
+<dt class="field-odd">Attribute left</dt>
+<dd class="field-odd"><p>the left child of the node, if any - assigning to this value will set the assigned Node’s parent</p>
+</dd>
+<dt class="field-even">Attribute right</dt>
+<dd class="field-even"><p>the right child of the node, if any - assigning to this value will set the assigned Node’s parent</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="lca.tree.Node.__eq__">
+<code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.tree.Node.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__ge__">
+<code class="sig-name descname">__ge__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.tree.Node.__ge__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self&gt;=value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__gt__">
+<code class="sig-name descname">__gt__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.tree.Node.__gt__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self&gt;value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.tree.Node.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – the value of this node</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__le__">
+<code class="sig-name descname">__le__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.tree.Node.__le__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self&lt;=value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__lt__">
+<code class="sig-name descname">__lt__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.tree.Node.__lt__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self&lt;value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__repr__">
+<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lca.tree.Node.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return repr(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lca.tree.Node.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.lca">
+<code class="sig-name descname">lca</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.tree.Node.lca" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the LCA (Lowest Common Ancestor) from within the tree whose root is this Node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – first node below the given root</p></li>
+<li><p><strong>b</strong> – second node below the given root</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the LCA of a and b (or None if no LCA exists)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.tree.Node.path">
+<code class="sig-name descname">path</code><span class="sig-paren">(</span><em class="sig-param">root</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.tree.Node.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the path from this node to <cite>root</cite> (<cite>root</cite> must be above this Node)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>root</strong> – node at which the traversal of parents will stop</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list representing the path of this Node to <cite>root</cite> (including this Node and <cite>root</cite>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lca.dag">
+<span id="lca-in-a-directed-acyclic-graph-dag"></span><h1>LCA in a directed acyclic graph (DAG)<a class="headerlink" href="#module-lca.dag" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="lca.dag.DAG">
+<em class="property">class </em><code class="sig-prename descclassname">lca.dag.</code><code class="sig-name descname">DAG</code><a class="headerlink" href="#lca.dag.DAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class representing a Directed Acyclic Graph.</p>
+<p>Note: it is up to the user to ensure the graph contains no cycles</p>
+<dl class="method">
+<dt id="lca.dag.DAG.__contains__">
+<code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the directed edge or vertex is present in the graph.</p>
+<p>A more Pythonic version of <cite>contains_edge()</cite> and <cite>contains_vertex()</cite>.</p>
+<p>To check a vertex, do <cite>vertex in dag</cite>. To check for an edge, do <cite>(a, b) in dag</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the directed edge or vertex is in the graph</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.__delitem__">
+<code class="sig-name descname">__delitem__</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.__delitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove an edge or vertex from the graph.</p>
+<p>A more Pythonic version of <cite>remove_edge()</cite> and <cite>remove_vertex()</cite>.</p>
+<p>To delete a vertex, do <cite>del dag[vertex]</cite>. To delete an edge, do <cite>del dag[(a, b)]</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.__eq__">
+<code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.__ge__">
+<code class="sig-name descname">__ge__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.__ge__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this graph is a supergraph of another, Pythonic-ally.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.__getitem__">
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain the set of vertices adjacent to this one.</p>
+<p>A more Pythonic version of <cite>adjacent()</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the set of adjacent vertices</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.__le__">
+<code class="sig-name descname">__le__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.__le__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this graph is a subgraph of another, Pythonic-ally.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.__repr__">
+<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return repr(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.__setitem__">
+<code class="sig-name descname">__setitem__</code><span class="sig-paren">(</span><em class="sig-param">v</em>, <em class="sig-param">adjacent</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the adjacency list for a vertex.</p>
+<p>If the vertex is not present, it will be added to the graph</p>
+<p>This allows you to create vertices and edges in a more Pythonic manner:
+- <cite>dag[1] = []</cite> # inserts vertex 1 into the graph
+- <cite>dag[0] = [1, 2, 3] # creates edges (0, 1), (0, 2) and (0, 3)</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – the starting vertex</p></li>
+<li><p><strong>b</strong> – the ending vertex</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the lowest common ancestor, if any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.add_edge">
+<code class="sig-name descname">add_edge</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.add_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new directed edge to the graph.</p>
+<p>Adds vertices to the graph if they are not already present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – the starting vertex</p></li>
+<li><p><strong>b</strong> – the ending vertex</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>this object (for method chaining)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.add_vertex">
+<code class="sig-name descname">add_vertex</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.add_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new vertex to the graph.</p>
+<p>Does nothing if the vertex is already in the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> – the new vertex to add</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>this object (for method chaining)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.adjacent">
+<code class="sig-name descname">adjacent</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.adjacent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain the set of vertices adjacent (connected by an edge of which this vertex is the start) to this vertex</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> – a vertex in the graph</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the set of adjacent vertices</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.contains_edge">
+<code class="sig-name descname">contains_edge</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.contains_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the directed edge is present in the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – the starting vertex</p></li>
+<li><p><strong>b</strong> – the ending vertex</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the directed edge is in the graph</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.contains_vertex">
+<code class="sig-name descname">contains_vertex</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.contains_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the vertex is present in the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the vertex is in the graph</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.is_subgraph">
+<code class="sig-name descname">is_subgraph</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.is_subgraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this graph is a subgraph of another.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> – the supergraph</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if this graph is a subgraph of another graph</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.is_supergraph">
+<code class="sig-name descname">is_supergraph</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.is_supergraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this graph is a supergraph of another.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> – the subgraph</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if this graph is a supergraph of another graph</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.lca">
+<code class="sig-name descname">lca</code><span class="sig-paren">(</span><em class="sig-param">root</em>, <em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.lca" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the lowest common ancestor of <cite>a</cite> and <cite>b</cite> below <cite>root</cite>.</p>
+<p>If multiple lowest common ancestors are valid (same depth), the one which is returned is non-deterministic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – the starting vertex</p></li>
+<li><p><strong>b</strong> – the ending vertex</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the lowest common ancestor, if any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.paths">
+<code class="sig-name descname">paths</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find paths from vertex <cite>a</cite> to vertex <cite>b</cite> in the graph.</p>
+<p>A set of tuples (each tuple representing a single path) is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – the starting vertex</p></li>
+<li><p><strong>b</strong> – the ending vertex</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a set of paths</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.remove_edge">
+<code class="sig-name descname">remove_edge</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.remove_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a directed edge from the graph.</p>
+<p>Vertices will never be removed, even if they become pendant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – the starting vertex</p></li>
+<li><p><strong>b</strong> – the ending vertex</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="lca.dag.DAG.remove_vertex">
+<code class="sig-name descname">remove_vertex</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#lca.dag.DAG.remove_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a vertex (and any connected edges) from the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vertex</strong> – the vertex to remove from the graph</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Software Engineering (CS3012)</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jack O'Sullivan.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
