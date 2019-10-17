@@ -29,10 +29,9 @@ jobs:
         run: pytest
       - name: Generate coverage
         run: |
-          pip install coveralls
-          pytest --cov=lca/
-          coveralls
-      - name: Coveralls coverage
-        uses: coverallsapp/github-action@master
+          pytest --cov=lca/ --cov-report=xml
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1.0.2
         with:
-          github-token: ${{ secrets.github_token }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.xml
