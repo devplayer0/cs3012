@@ -16,6 +16,12 @@ provided for:
 
 Click the badges above for `test results`_, documentation_ and coverage_.
 
+``master`` contains the combined code of the binary tree and DAG implementations (along with their corresponding unit tests).
+``tree`` contains only the binary implementation and ``dag`` is a branch where the DAG implementation was developed.
+
+**A short essay on Linus Torvalds (a "key software engineer") can be found**
+`here <https://github.com/devplayer0/cs3012/blob/master/essay.rst>`_
+
 .. |test results| image:: https://github.com/devplayer0/cs3012/workflows/Tests/badge.svg
 .. _test results: https://devplayer0.github.io/cs3012/tests.html
 
