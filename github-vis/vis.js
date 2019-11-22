@@ -1,21 +1,6 @@
-async function loadData(username) {
-  const res = await fetch(`https://api.github.com/users/${username}`);
-  if (!res.ok) {
-    alert(`Failed to fetch info for ${username}`);
-    return;
-  }
-
-  const info = await res.json();
-  console.log(info);
-  $('#info-title').text(`User: ${info.login}`);
-  $('#info-avatar').attr('src', info.avatar_url);
-  $('#info-link').attr('href', info.html_url);
-  $('#info-name').text(info.name);
-}
-
 Vue.component('UsernameEntry', {
   template: `
-    <input type="text" v-bind:placeholder="placeholder" v-model="value" />
+    <input type="text" :placeholder="placeholder" v-model="value" />
   `,
   props: {
     placeholder: String,
@@ -24,21 +9,21 @@ Vue.component('UsernameEntry', {
       required: true
     }
   },
-  data: function() {
+  data() {
     return {
       value: ''
     };
   },
-  created: function() {
+  created() {
     this.emitValue = _.debounce(this._emitValue, this.debounce);
   },
   methods: {
-    _emitValue: function(value) {
+    _emitValue(value) {
       this.$emit('input', value);
     }
   },
   watch: {
-    value: function(n, o) {
+    value(n, o) {
       this.emitValue(n);
     }
   }
@@ -48,9 +33,41 @@ Vue.component('UserInfo', {
   props: ['username'],
   template: `
     <div>
-      <h1>User: {{ username }}</h1>
+      <h2>{{ username }}</h2>
+      <div v-if="info && info != 'error'">
+        <a :href="info.html_url">
+          <img class="avatar" :alt="userAlt" :src="info.avatar_url">
+        </a>
+        <p>Name: {{ info.name }}</p>
+        <p>Repos: {{ info.public_repos }}</p>
+        <p v-if="info.location">Location: {{ info.location }}</p>
+        <p>Followers: {{ info.followers }}, Following: {{ info.following }}</p>
+        <a v-if="info.blog" :href="info.blog">{{ info.blog }}</a>
+      </div>
+      <p v-show="info == 'error'" class="error">Error: failed to retrieve info for '{{ username }}'</p>
     </div>
-  `
+  `,
+  computed: {
+    userAlt() {
+      return `${this.username}'s avatar`;
+    }
+  },
+  asyncComputed: {
+    async info() {
+      if (!this.username) {
+        return;
+      }
+
+      const res = await fetch(`https://api.github.com/users/${this.username}`);
+      if (!res.ok) {
+        return 'error';
+      }
+
+      const info = await res.json();
+      console.log(info);
+      return info;
+    }
+  }
 });
 
 const vm = new Vue({
