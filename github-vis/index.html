@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>GitHub API Access</title>
+  <head>
+    <meta charset="utf-8" />
+    <title>GitHub Visualisations</title>
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-              crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div id="app">
-            <main role="main" class="container">
-                <h1>GitHub API Access</h1>
-                <p class="lead">Enter your GitHub username to retrieve some information about your profile.</p>
-
-                <username-entry v-model="username" :debounce="750" placeholder="some-coder"></username-entry>
-                <user-info v-show="username" v-bind:username="username"></user-info>
-            </main>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="app">
+      <nav class="navbar navbar-dark bg-dark navbar-expand-md fixed-top">
+        <router-link class="navbar-brand" to="/access">GitHub Visualisations</router-link>
+        <div class="navbar-nav">
+          <router-link class="nav-item nav-link" active-class="active" to="/access">Basic Access</router-link>
+          <router-link class="nav-item nav-link" active-class="active" to="/graph">Dependency Graph</router-link>
         </div>
+      </nav>
+      <main role="main" class="container">
+        <router-view></router-view>
+      </main>
+    </div>
 
-        <!-- JavaScript dependencies -->
-        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue-async-computed@3.7.0/dist/vue-async-computed.min.js"></script>
+    <!-- JavaScript dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.1.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-async-computed@3.7.0"></script>
 
-        <script src="vis.js"></script>
-    </body>
+    <script src="vis.js"></script>
+  </body>
 </html>
