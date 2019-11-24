@@ -82,3 +82,35 @@ Vue.component('UserInfo', {
     }
   }
 });
+
+function paramSync(path, name, uriEncode = false) {
+  const e = function(v) {
+    return uriEncode ? encodeURIComponent(v) : v;
+  };
+  const d = function(v) {
+    return uriEncode ? decodeURIComponent(v || '') : v;
+  };
+
+  return {
+    data() {
+      return {
+        [name]: ''
+      };
+    },
+    created() {
+      this[name] = d(this.$route.params[name]);
+    },
+    watch: {
+      $route(to, from) {
+        this[name] = d(to.params[name]);
+      },
+      [name](n, o) {
+        if (d(this.$route.params[name]) == n) {
+          return;
+        }
+
+        this.$router.push(`${path}/${e(n)}`);
+      }
+    }
+  };
+}

@@ -9,6 +9,7 @@ Vue.component('NotFound', {
 });
 
 Vue.component('Access', {
+  mixins: [paramSync('/access', 'username')],
   template: `
     <div>
       <h1>Basic API access</h1>
@@ -18,30 +19,11 @@ Vue.component('Access', {
       </debounced-input>
       <user-info v-show="username" v-bind:username="username"></user-info>
     </div>
-  `,
-  data() {
-    return {
-      username: ''
-    };
-  },
-  created() {
-    this.username = this.$route.params.username;
-  },
-  watch: {
-    $route(to, from) {
-      this.username = to.params.username;
-    },
-    username(n, o) {
-      if (this.$route.params.username == n) {
-        return;
-      }
-
-      this.$router.push(`/access/${n}`);
-    }
-  }
+  `
 });
 
 Vue.component('DependencyGraph', {
+  mixins: [paramSync('/graph', 'repo', true)],
   template: `
     <div>
       <h1>Dependency graph</h1>
@@ -50,10 +32,5 @@ Vue.component('DependencyGraph', {
       <debounced-input v-model="repo" :debounce="750" prepend="https://github.com/" placeholder="some-coder/some-repo">
       </debounced-input>
     </div>
-  `,
-  data() {
-    return {
-      repo: ''
-    };
-  }
+  `
 });

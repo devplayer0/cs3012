@@ -6,7 +6,7 @@ const router = new VueRouter({
     { path: '/access/:username', component: Vue.component('Access') },
 
     { path: '/graph', component: Vue.component('DependencyGraph') },
-    { path: '/graph/:username/:repo', component: Vue.component('DependencyGraph') },
+    { path: '/graph/:repo', component: Vue.component('DependencyGraph') },
 
     { path: '*', component: Vue.component('NotFound') }
   ]
