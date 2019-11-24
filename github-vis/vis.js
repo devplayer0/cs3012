@@ -1,6 +1,11 @@
 Vue.component('UsernameEntry', {
   template: `
-    <input type="text" :placeholder="placeholder" v-model="value" />
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">https://github.com/</span>
+      </div>
+      <input class="form-control" type="text" :placeholder="placeholder" v-model="value" />
+    </div>
   `,
   props: {
     placeholder: String,
@@ -33,18 +38,29 @@ Vue.component('UserInfo', {
   props: ['username'],
   template: `
     <div>
-      <h2>{{ username }}</h2>
-      <div v-if="info && info != 'error'">
-        <a :href="info.html_url">
-          <img class="avatar" :alt="userAlt" :src="info.avatar_url">
-        </a>
-        <p>Name: {{ info.name }}</p>
-        <p>Repos: {{ info.public_repos }}</p>
-        <p v-if="info.location">Location: {{ info.location }}</p>
-        <p>Followers: {{ info.followers }}, Following: {{ info.following }}</p>
-        <a v-if="info.blog" :href="info.blog">{{ info.blog }}</a>
+      <div v-show="info == 'error'" class="alert alert-danger" role="alert">
+        Failed to retrieve info for '{{ username }}'
       </div>
-      <p v-show="info == 'error'" class="error">Error: failed to retrieve info for '{{ username }}'</p>
+      <div v-if="info && info != 'error'" class="user-card card">
+        <div class="row no-gutters">
+          <div class="col-md-5">
+            <a :href="info.html_url">
+              <img class="card-img" :alt="userAlt" :src="info.avatar_url">
+            </a>
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h4 class="card-title">{{ username }} <span class="badge badge-secondary">{{ info.public_repos }} repos</span></h4>
+              <h6 class="card-subtitle mb-2 text-muted">{{ info.name }}</h6>
+                <p class="card-text">
+                  <template v-if="info.location">Location: {{ info.location }} <br /></template>
+                  Followers: {{ info.followers }}, Following: {{ info.following }}
+                </p>
+                <a class="card-link" v-if="info.blog" :href="info.blog">{{ info.blog }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `,
   computed: {

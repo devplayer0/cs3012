@@ -2,15 +2,21 @@
 <html>
     <head>
         <title>GitHub API Access</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div id="app">
-            <h1>GitHub API Access</h1>
-            <p>Enter your GitHub username and click the button to retrieve some information about your profile.</p>
+            <main role="main" class="container">
+                <h1>GitHub API Access</h1>
+                <p class="lead">Enter your GitHub username to retrieve some information about your profile.</p>
 
-            <username-entry v-model="username" :debounce="750" placeholder="GitHub username"></username-entry>
-            <user-info v-show="username" v-bind:username="username"></user-info>
+                <username-entry v-model="username" :debounce="750" placeholder="some-coder"></username-entry>
+                <user-info v-show="username" v-bind:username="username"></user-info>
+            </main>
         </div>
 
         <!-- JavaScript dependencies -->
