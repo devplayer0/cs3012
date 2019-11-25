@@ -31,7 +31,7 @@ Vue.component('GraphView', {
 
       <debounced-input v-model="repo" :debounce="750" prepend="https://github.com/" placeholder="some-coder/some-repo">
       </debounced-input>
-      <dependency-graph v-show="repo" :repo="repo"></dependency-graph>
+      <dependency-graph :repo="repo"></dependency-graph>
     </div>
   `
 });

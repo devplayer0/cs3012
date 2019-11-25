@@ -17,6 +17,9 @@ function _ghRecurseDGQ(i) {
         nodes {
           repository {
             nameWithOwner
+            stargazers {
+              totalCount
+            }
             ${_ghRecurseDGQ(i-1)}
           }
         }
@@ -30,6 +33,10 @@ async function githubDependencyGraph(token, repo, depth = 2) {
   const repoSplit = repo.split('/');
   const query = `query {
     repository(owner: "${repoSplit[0]}", name: "${repoSplit[1]}") {
+      nameWithOwner
+      stargazers {
+        totalCount
+      }
       ${_ghRecurseDGQ(depth)}
     }
   }`;
@@ -47,6 +54,46 @@ async function githubDependencyGraph(token, repo, depth = 2) {
     return null;
   }
 
-  const data = res.json();
-  return data;
+  return await res.json();
+}
+
+function _ghNLDGRecurse(repo, nodes, links) {
+  if (nodes[repo.nameWithOwner]) {
+    return;
+  }
+  nodes[repo.nameWithOwner] = { stars: repo.stargazers.totalCount };
+
+  const manifests = repo.dependencyGraphManifests;
+  if (!manifests) {
+    return;
+  }
+  const deps = manifests.nodes[0];
+  if (!deps) {
+    return;
+  }
+  _.forOwn(deps.dependencies.nodes, n => {
+    const r = n.repository;
+    if (!r) {
+      return;
+    }
+
+    links.push({ source: repo.nameWithOwner, target: r.nameWithOwner });
+    _ghNLDGRecurse(r, nodes, links);
+  });
+}
+async function githubNLDependencyGraph(token, repo, depth = 2) {
+  const data = await githubDependencyGraph(token, repo, depth);
+  if (!data) {
+    return null;
+  }
+
+  let nodes = {};
+  let links = [];
+  _ghNLDGRecurse(data.data.repository, nodes, links);
+  nodes = _.values(_.mapValues(nodes, (n, r) => {
+    n.name = r;
+    return n;
+  }));
+
+  return { nodes, links };
 }
