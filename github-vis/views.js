@@ -8,7 +8,7 @@ Vue.component('NotFound', {
   `
 });
 
-Vue.component('Access', {
+Vue.component('AccessView', {
   mixins: [paramSync('/access', 'username')],
   template: `
     <div>
@@ -17,12 +17,12 @@ Vue.component('Access', {
 
       <debounced-input v-model="username" :debounce="750" prepend="https://github.com/" placeholder="some-coder">
       </debounced-input>
-      <user-info v-show="username" v-bind:username="username"></user-info>
+      <user-info v-show="username" :username="username"></user-info>
     </div>
   `
 });
 
-Vue.component('DependencyGraph', {
+Vue.component('GraphView', {
   mixins: [paramSync('/graph', 'repo', true)],
   template: `
     <div>
@@ -31,6 +31,7 @@ Vue.component('DependencyGraph', {
 
       <debounced-input v-model="repo" :debounce="750" prepend="https://github.com/" placeholder="some-coder/some-repo">
       </debounced-input>
+      <dependency-graph v-show="repo" :repo="repo"></dependency-graph>
     </div>
   `
 });

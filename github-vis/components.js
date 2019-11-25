@@ -48,7 +48,10 @@ Vue.component('UserInfo', {
           </div>
           <div class="col-md-7">
             <div class="card-body">
-              <h4 class="card-title">{{ username }} <span class="badge badge-secondary">{{ info.public_repos }} repos</span></h4>
+              <h4 class="card-title">
+                {{ username }}
+                <span class="badge badge-secondary">{{ info.public_repos }} repos</span>
+              </h4>
               <h6 class="card-subtitle mb-2 text-muted">{{ info.name }}</h6>
                 <p class="card-text">
                   <template v-if="info.location">Location: {{ info.location }} <br /></template>
@@ -72,7 +75,7 @@ Vue.component('UserInfo', {
         return;
       }
 
-      const res = await fetch(`https://api.github.com/users/${this.username}`);
+      const user = await githubUserInfo(this.username);
       if (!res.ok) {
         return 'error';
       }
@@ -114,3 +117,18 @@ function paramSync(path, name, uriEncode = false) {
     }
   };
 }
+
+Vue.component('DependencyGraph', {
+  props: ['repo'],
+  template: `
+    <div></div>
+  `,
+  async created() {
+    const data = await githubDependencyGraph('REDACTED', 'netsoc/webspace-ng', 4);
+    if (!data) {
+      return 'error';
+    }
+
+    console.log(data);
+  }
+});
