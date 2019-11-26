@@ -1,3 +1,8 @@
+// why doesn't this just exist...
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 Vue.component('DebouncedInput', {
   template: `
     <div class="input-group mb-3">
@@ -76,12 +81,11 @@ Vue.component('UserInfo', {
       }
 
       const user = await githubUserInfo(this.username);
-      if (!res.ok) {
+      if (!user) {
         return 'error';
       }
 
-      const info = await res.json();
-      return info;
+      return user;
     }
   }
 });
@@ -121,22 +125,16 @@ function paramSync(path, name, uriEncode = false) {
 Vue.component('DependencyGraph', {
   props: ['repo'],
   template: `
-    <div>
-      <svg width="100%" height="720"></svg>
-    </div>
+    <svg width="100%" height="720"></svg>
   `,
-  async created() {
-    /*const data = await githubNLDependencyGraph('REDACTED', 'netsoc/webspace-ng', 4);
-    if (!data) {
-      return 'error';
+  watch: {
+    repo(n) {
+      this.reloadData(n);
     }
-
-    console.log(JSON.stringify(data));*/
   },
-  async mounted() {
+  mounted() {
     this.svg = d3
-      .select(this.$el)
-      .select('svg');
+      .select(this.$el);
 
     const w = 600;
     const h = 600;
@@ -152,37 +150,69 @@ Vue.component('DependencyGraph', {
         .strength(-700))
       .force('cx', d3.forceX())
       .force('cy', d3.forceY())
-      .on('tick', () => {
-        let node = this.svg
-          .selectAll('.node');
-          node.select('circle')
-            .attr('cx', d => d.x)
-            .attr('cy', d => d.y);
-          node.select('text')
-              .attr('x', d => d.x)
-              .attr('y', d => d.y - this.scale(d.stars) - 4);
+      .on('tick', this.tick);
 
-        this.svg
-          .selectAll('.link')
-            .attr('x1', d => d.source.x)
-            .attr('y1', d => d.source.y)
-            .attr('x2', d => d.target.x)
-            .attr('y2', d => d.target.y);
-      });
-
-    const data = JSON.parse('{"nodes":[{"stars":2,"name":"netsoc/webspace-ng","fx":0,"fy":0},{"stars":5,"name":"joubin/DNSPython"},{"stars":1063,"name":"PythonCharmers/python-future"},{"stars":25,"name":"ThomasWaldmann/argparse"},{"stars":1,"name":"simplegeo/importlib"},{"stars":3,"name":"calvinchengx/python-unittest2"},{"stars":4,"name":"palaviv/eventfd"},{"stars":166,"name":"xolox/python-humanfriendly"},{"stars":2,"name":"onlytiancai/flake8"},{"stars":35,"name":"PyCQA/flake8-docstrings"},{"stars":587,"name":"PyCQA/pydocstyle"},{"stars":371,"name":"snowballstem/snowball"},{"stars":810,"name":"PyCQA/pyflakes"},{"stars":0,"name":"scooterman/pymunch"},{"stars":1056,"name":"Lawouach/WebSocket-for-Python"},{"stars":1098,"name":"cherrypy/cherrypy"},{"stars":90,"name":"cherrypy/cheroot"},{"stars":1115,"name":"erikrose/more-itertools"},{"stars":1,"name":"jaraco/portend"},{"stars":8,"name":"zopefoundation/zc.lockfile"},{"stars":1,"name":"Distrotech/setuptools"},{"stars":4693,"name":"cython/cython"},{"stars":8959,"name":"jupyter/jupyter"},{"stars":281,"name":"ipython/ipykernel"},{"stars":1628,"name":"jupyter-widgets/ipywidgets"},{"stars":133,"name":"jupyter/jupyter_console"},{"stars":797,"name":"jupyter/nbconvert"},{"stars":6559,"name":"jupyter/notebook"},{"stars":197,"name":"jupyter/qtconsole"},{"stars":3174,"name":"rkern/line_profiler"},{"stars":13897,"name":"ipython/ipython"},{"stars":2337,"name":"zeromq/pyzmq"},{"stars":4940,"name":"gevent/gevent"},{"stars":5138,"name":"pytest-dev/pytest"},{"stars":18568,"name":"tornadoweb/tornado"},{"stars":1095,"name":"python-greenlet/greenlet"},{"stars":157,"name":"pypa/wheel"},{"stars":7,"name":"calvinchengx/python-mock"}],"links":[{"source":"netsoc/webspace-ng","target":"joubin/DNSPython"},{"source":"joubin/DNSPython","target":"PythonCharmers/python-future"},{"source":"PythonCharmers/python-future","target":"ThomasWaldmann/argparse"},{"source":"PythonCharmers/python-future","target":"simplegeo/importlib"},{"source":"PythonCharmers/python-future","target":"calvinchengx/python-unittest2"},{"source":"netsoc/webspace-ng","target":"palaviv/eventfd"},{"source":"netsoc/webspace-ng","target":"xolox/python-humanfriendly"},{"source":"xolox/python-humanfriendly","target":"onlytiancai/flake8"},{"source":"xolox/python-humanfriendly","target":"PyCQA/flake8-docstrings"},{"source":"PyCQA/flake8-docstrings","target":"onlytiancai/flake8"},{"source":"PyCQA/flake8-docstrings","target":"PyCQA/pydocstyle"},{"source":"PyCQA/pydocstyle","target":"snowballstem/snowball"},{"source":"xolox/python-humanfriendly","target":"PyCQA/pyflakes"},{"source":"netsoc/webspace-ng","target":"scooterman/pymunch"},{"source":"netsoc/webspace-ng","target":"Lawouach/WebSocket-for-Python"},{"source":"Lawouach/WebSocket-for-Python","target":"cherrypy/cherrypy"},{"source":"cherrypy/cherrypy","target":"cherrypy/cheroot"},{"source":"cherrypy/cherrypy","target":"erikrose/more-itertools"},{"source":"cherrypy/cherrypy","target":"jaraco/portend"},{"source":"cherrypy/cherrypy","target":"zopefoundation/zc.lockfile"},{"source":"zopefoundation/zc.lockfile","target":"Distrotech/setuptools"},{"source":"Lawouach/WebSocket-for-Python","target":"cython/cython"},{"source":"cython/cython","target":"jupyter/jupyter"},{"source":"jupyter/jupyter","target":"ipython/ipykernel"},{"source":"jupyter/jupyter","target":"jupyter-widgets/ipywidgets"},{"source":"jupyter/jupyter","target":"jupyter/jupyter_console"},{"source":"jupyter/jupyter","target":"jupyter/nbconvert"},{"source":"jupyter/jupyter","target":"jupyter/notebook"},{"source":"jupyter/jupyter","target":"jupyter/qtconsole"},{"source":"cython/cython","target":"rkern/line_profiler"},{"source":"rkern/line_profiler","target":"cython/cython"},{"source":"rkern/line_profiler","target":"ipython/ipython"},{"source":"cython/cython","target":"zeromq/pyzmq"},{"source":"zeromq/pyzmq","target":"gevent/gevent"},{"source":"zeromq/pyzmq","target":"pytest-dev/pytest"},{"source":"zeromq/pyzmq","target":"tornadoweb/tornado"},{"source":"zeromq/pyzmq","target":"calvinchengx/python-unittest2"},{"source":"Lawouach/WebSocket-for-Python","target":"gevent/gevent"},{"source":"Lawouach/WebSocket-for-Python","target":"python-greenlet/greenlet"},{"source":"python-greenlet/greenlet","target":"Distrotech/setuptools"},{"source":"python-greenlet/greenlet","target":"pypa/wheel"},{"source":"Lawouach/WebSocket-for-Python","target":"calvinchengx/python-mock"},{"source":"Lawouach/WebSocket-for-Python","target":"pytest-dev/pytest"},{"source":"Lawouach/WebSocket-for-Python","target":"tornadoweb/tornado"}]}');
-    this.update(data.nodes, data.links);
+    if (this.repo) {
+      this.reloadData();
+    }
   },
   methods: {
+    applyDependencyIndicator(d) {
+      let vx = d.target.x - d.source.x;
+      let vy = d.target.y - d.source.y;
+      const mag = Math.sqrt(vx*vx + vy*vy);
+      vx /= mag;
+      vy /= mag;
+
+      const dist = this.radiusScale(d.target.stars);
+      d.px = d.source.x + vx * (mag - dist);
+      d.py = d.source.y + vy * (mag - dist);
+    },
+    async reloadData() {
+      //const data = await githubNLDependencyGraph('REDACTED', this.repo, 4);
+      const data = JSON.parse('{"nodes":[{"stars":2,"name":"netsoc/webspace-ng","fx":0,"fy":0},{"stars":5,"name":"joubin/DNSPython"},{"stars":1063,"name":"PythonCharmers/python-future"},{"stars":25,"name":"ThomasWaldmann/argparse"},{"stars":1,"name":"simplegeo/importlib"},{"stars":3,"name":"calvinchengx/python-unittest2"},{"stars":4,"name":"palaviv/eventfd"},{"stars":166,"name":"xolox/python-humanfriendly"},{"stars":2,"name":"onlytiancai/flake8"},{"stars":35,"name":"PyCQA/flake8-docstrings"},{"stars":587,"name":"PyCQA/pydocstyle"},{"stars":371,"name":"snowballstem/snowball"},{"stars":810,"name":"PyCQA/pyflakes"},{"stars":0,"name":"scooterman/pymunch"},{"stars":1056,"name":"Lawouach/WebSocket-for-Python"},{"stars":1098,"name":"cherrypy/cherrypy"},{"stars":90,"name":"cherrypy/cheroot"},{"stars":1115,"name":"erikrose/more-itertools"},{"stars":1,"name":"jaraco/portend"},{"stars":8,"name":"zopefoundation/zc.lockfile"},{"stars":1,"name":"Distrotech/setuptools"},{"stars":4693,"name":"cython/cython"},{"stars":8959,"name":"jupyter/jupyter"},{"stars":281,"name":"ipython/ipykernel"},{"stars":1628,"name":"jupyter-widgets/ipywidgets"},{"stars":133,"name":"jupyter/jupyter_console"},{"stars":797,"name":"jupyter/nbconvert"},{"stars":6559,"name":"jupyter/notebook"},{"stars":197,"name":"jupyter/qtconsole"},{"stars":3174,"name":"rkern/line_profiler"},{"stars":13897,"name":"ipython/ipython"},{"stars":2337,"name":"zeromq/pyzmq"},{"stars":4940,"name":"gevent/gevent"},{"stars":5138,"name":"pytest-dev/pytest"},{"stars":18568,"name":"tornadoweb/tornado"},{"stars":1095,"name":"python-greenlet/greenlet"},{"stars":157,"name":"pypa/wheel"},{"stars":7,"name":"calvinchengx/python-mock"}],"links":[{"source":"netsoc/webspace-ng","target":"joubin/DNSPython"},{"source":"joubin/DNSPython","target":"PythonCharmers/python-future"},{"source":"PythonCharmers/python-future","target":"ThomasWaldmann/argparse"},{"source":"PythonCharmers/python-future","target":"simplegeo/importlib"},{"source":"PythonCharmers/python-future","target":"calvinchengx/python-unittest2"},{"source":"netsoc/webspace-ng","target":"palaviv/eventfd"},{"source":"netsoc/webspace-ng","target":"xolox/python-humanfriendly"},{"source":"xolox/python-humanfriendly","target":"onlytiancai/flake8"},{"source":"xolox/python-humanfriendly","target":"PyCQA/flake8-docstrings"},{"source":"PyCQA/flake8-docstrings","target":"onlytiancai/flake8"},{"source":"PyCQA/flake8-docstrings","target":"PyCQA/pydocstyle"},{"source":"PyCQA/pydocstyle","target":"snowballstem/snowball"},{"source":"xolox/python-humanfriendly","target":"PyCQA/pyflakes"},{"source":"netsoc/webspace-ng","target":"scooterman/pymunch"},{"source":"netsoc/webspace-ng","target":"Lawouach/WebSocket-for-Python"},{"source":"Lawouach/WebSocket-for-Python","target":"cherrypy/cherrypy"},{"source":"cherrypy/cherrypy","target":"cherrypy/cheroot"},{"source":"cherrypy/cherrypy","target":"erikrose/more-itertools"},{"source":"cherrypy/cherrypy","target":"jaraco/portend"},{"source":"cherrypy/cherrypy","target":"zopefoundation/zc.lockfile"},{"source":"zopefoundation/zc.lockfile","target":"Distrotech/setuptools"},{"source":"Lawouach/WebSocket-for-Python","target":"cython/cython"},{"source":"cython/cython","target":"jupyter/jupyter"},{"source":"jupyter/jupyter","target":"ipython/ipykernel"},{"source":"jupyter/jupyter","target":"jupyter-widgets/ipywidgets"},{"source":"jupyter/jupyter","target":"jupyter/jupyter_console"},{"source":"jupyter/jupyter","target":"jupyter/nbconvert"},{"source":"jupyter/jupyter","target":"jupyter/notebook"},{"source":"jupyter/jupyter","target":"jupyter/qtconsole"},{"source":"cython/cython","target":"rkern/line_profiler"},{"source":"rkern/line_profiler","target":"cython/cython"},{"source":"rkern/line_profiler","target":"ipython/ipython"},{"source":"cython/cython","target":"zeromq/pyzmq"},{"source":"zeromq/pyzmq","target":"gevent/gevent"},{"source":"zeromq/pyzmq","target":"pytest-dev/pytest"},{"source":"zeromq/pyzmq","target":"tornadoweb/tornado"},{"source":"zeromq/pyzmq","target":"calvinchengx/python-unittest2"},{"source":"Lawouach/WebSocket-for-Python","target":"gevent/gevent"},{"source":"Lawouach/WebSocket-for-Python","target":"python-greenlet/greenlet"},{"source":"python-greenlet/greenlet","target":"Distrotech/setuptools"},{"source":"python-greenlet/greenlet","target":"pypa/wheel"},{"source":"Lawouach/WebSocket-for-Python","target":"calvinchengx/python-mock"},{"source":"Lawouach/WebSocket-for-Python","target":"pytest-dev/pytest"},{"source":"Lawouach/WebSocket-for-Python","target":"tornadoweb/tornado"}]}');
+      if (!data) {
+        return;
+      }
+      await sleep(500);
+
+      this.updateData(data.nodes, data.links);
+    },
+
+    tick() {
+      this.svg
+        .selectAll('.node')
+          .call(node => node
+            .select('circle')
+              .attr('cx', d => d.x)
+              .attr('cy', d => d.y))
+          .call(node => node
+            .select('text')
+              .attr('x', d => d.x)
+              .attr('y', d => d.y - this.radiusScale(d.stars) - 4));
+
+      this.svg
+        .selectAll('.link')
+          .call(link => link
+            .select('line')
+              .attr('x1', d => d.source.x)
+              .attr('y1', d => d.source.y)
+              .attr('x2', d => d.target.x)
+              .attr('y2', d => d.target.y))
+          .call(link => link
+            .select('circle')
+              .each(this.applyDependencyIndicator)
+              .attr('cx', d => d.px)
+              .attr('cy', d => d.py));
+    },
     drag() {
-      const sim = this.simulation;
       return d3.drag()
         .on('start', d => {
           if (d.name == this.repo) {
             return;
           }
           if (!d3.event.active) {
-            sim
+            this.simulation
               .alphaTarget(0.3)
               .restart();
           }
@@ -203,20 +233,21 @@ Vue.component('DependencyGraph', {
             return;
           }
           if (!d3.event.active) {
-            sim.alphaTarget(0);
+            this.simulation
+              .alphaTarget(0);
           }
 
           d.fx = null;
           d.fy = null;
         });
     },
-    update(nodes, links) {
+    updateData(nodes, links) {
       const maxStars = _.max(_.map(nodes, n => n.stars));
-      this.scale = d3.scaleLog()
+      this.radiusScale = d3.scaleLog()
         .domain([1, maxStars])
         .clamp(true)
         .range([5, 13]);
-      const rScale = d3.scaleLog()
+      this.repulsionScale = d3.scaleLog()
         .domain([1, maxStars])
         .clamp(true)
         .range([-200, -1700]);
@@ -227,41 +258,55 @@ Vue.component('DependencyGraph', {
           .links(links);
       this.simulation
         .force('repulsion')
-          .strength(d => rScale(d.name.length));
+          .strength(d => this.repulsionScale(d.name.length));
+      this.simulation
+        .alphaTarget(0.3)
+        .restart();
 
       this.svg
         .selectAll('.link')
           .data(links)
-          .join('line')
-            .attr('class', 'link')
-            .attr('x1', d => d.source.x)
-            .attr('y1', d => d.source.y)
-            .attr('x2', d => d.target.x)
-            .attr('y2', d => d.target.y)
-            .attr('stroke', '#999')
-            .attr('stroke-opacity', 0.7);
+          .join(enter => enter
+            .append('g')
+              .attr('class', 'link')
+            .call(enter => enter
+              .append('line')
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y)
+                .attr('stroke', '#999')
+                .attr('stroke-opacity', 0.7))
+            .call(enter => enter
+              .append('circle')
+                .each(this.applyDependencyIndicator)
+                .attr('cx', d => d.px)
+                .attr('cy', d => d.py)
+                .attr('r', 2.5)
+                .attr('fill', 'red')));
+
       this.svg
         .selectAll('.node')
           .data(nodes)
-          .join(enter => {
-            const g = enter
+          .join(enter => enter
               .append('g')
-                .attr('class', 'node');
-              g.append('circle')
-                .attr('cx', d => d.x)
-                .attr('cy', d => d.y)
-                .attr('r', d => this.scale(d.stars))
-                .attr('fill', d => d.name == this.repo ? 'green' : 'black')
-                .call(this.drag());
-              g.append('text')
-                .attr('x', d => d.x)
-                .attr('y', d => d.y)
-                .attr('text-anchor', 'middle')
-                .style('user-select', 'none')
-                .style('font-size', '0.8rem')
-                .text(d => d.name.split('/')[1]);
-            return g;
-          });
+                .attr('class', 'node')
+              .call(enter => enter
+                .append('circle')
+                  .attr('cx', d => d.x)
+                  .attr('cy', d => d.y)
+                  .attr('r', d => this.radiusScale(d.stars))
+                  .attr('fill', d => d.name == this.repo ? 'green' : 'black')
+                  .call(this.drag()))
+              .call(enter => enter
+                .append('text')
+                  .attr('x', d => d.x)
+                  .attr('y', d => d.y)
+                  .attr('text-anchor', 'middle')
+                  .attr('pointer-events', 'none')
+                  .style('user-select', 'none')
+                  .style('font-size', '0.8rem')
+                  .text(d => d.name.split('/')[1])));
     }
   }
 });

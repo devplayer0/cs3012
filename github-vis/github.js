@@ -1,9 +1,14 @@
 async function githubUserInfo(user) {
-  return await fetch(`https://api.github.com/users/${user}`, {
+  const res = await fetch(`https://api.github.com/users/${user}`, {
     headers: {
       'Accept': 'application/vnd.github.v3+json'
     }
   });
+  if (!res.ok) {
+    return null;
+  }
+
+  return await res.json();
 }
 
 function _ghRecurseDGQ(i) {
@@ -13,11 +18,11 @@ function _ghRecurseDGQ(i) {
 
   return `dependencyGraphManifests(first: 1, withDependencies: true) {
     nodes {
-      dependencies {
+      dependencies(first: 10) {
         nodes {
           repository {
             nameWithOwner
-            stargazers {
+            stargazers(first: 0) {
               totalCount
             }
             ${_ghRecurseDGQ(i-1)}
@@ -32,6 +37,12 @@ function _ghRecurseDGQ(i) {
 async function githubDependencyGraph(token, repo, depth = 2) {
   const repoSplit = repo.split('/');
   const query = `query {
+    rateLimit {
+      limit
+      cost
+      remaining
+      resetAt
+    }
     repository(owner: "${repoSplit[0]}", name: "${repoSplit[1]}") {
       nameWithOwner
       stargazers {
@@ -48,7 +59,8 @@ async function githubDependencyGraph(token, repo, depth = 2) {
       'Content-Type': 'application/json',
       'Accept': 'application/vnd.github.hawkgirl-preview+json'
     },
-    body: JSON.stringify({ query })
+    body: JSON.stringify({ query }),
+    mode: 'no-cors'
   });
   if (!res.ok) {
     return null;
@@ -90,6 +102,8 @@ async function githubNLDependencyGraph(token, repo, depth = 2) {
   let nodes = {};
   let links = [];
   _ghNLDGRecurse(data.data.repository, nodes, links);
+  nodes[repo].fx = 0;
+  nodes[repo].fy = 0;
   nodes = _.values(_.mapValues(nodes, (n, r) => {
     n.name = r;
     return n;
