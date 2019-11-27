@@ -50,7 +50,7 @@ Vue.component('GraphView', {
         </div>
       </debounced-input>
       <dependency-graph :repo="repo" :depth="nDepth" @load-start="loading = true"
-                        @load-end="loading = false">
+                        @load-end="loading = false" @repo-change="repo = $event">
       </dependency-graph>
     </div>
   `,
