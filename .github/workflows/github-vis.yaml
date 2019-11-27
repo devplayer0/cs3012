@@ -15,9 +15,6 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: Install Now
-        run: yarn global add now
-
       - name: Prepare code for deployment
         run: |
           # use minified vue.js
@@ -26,4 +23,4 @@ jobs:
           echo "const GRAPHQL_TOKEN = '${{ secrets.GRAPHQL_TOKEN }}';" > github-vis/token.js
 
       - name: Deploy to Now
-        run: cd github-vis/ && now --token=${{ secrets.ZEIT_TOKEN }} --prod
+        run: cd github-vis/ && npx now --token=${{ secrets.ZEIT_TOKEN }} --prod
