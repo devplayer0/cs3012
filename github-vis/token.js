@@ -1,1 +1,1 @@
-const GRAPHQL_TOKEN = '';
+const GRAPHQL_TOKEN = 'e7a8e3d5dcb9667e5432056877ccafa4f0d6b337';
