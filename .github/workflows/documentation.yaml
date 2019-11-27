@@ -2,7 +2,6 @@ name: Documentation
 
 on:
   - push
-  - pull_request
 
 jobs:
   test:
@@ -31,16 +30,6 @@ jobs:
 
       - name: Generate test report
         run: pytest --html=docs/build/html/tests.html --self-contained-html || true
-
-      - name: Install GitHub visualizations to output directory
-        run: |
-          cp -r github-vis/ docs/build/html/
-          rm docs/build/html/github-vis/.gitignore
-
-          # use minified vue.js
-          sed -i 's:vue/dist/vue.js:vue@2.6.10:g' docs/build/html/github-vis/index.html
-          # install github token (it's read-only but still not great)
-          echo "const GRAPHQL_TOKEN = '${{ secrets.GRAPHQL_TOKEN }}';" > docs/build/html/github-vis/token.js
 
       - name: Deploy documentation and test report to GitHub pages
         uses: peaceiris/actions-gh-pages@v2.5.0

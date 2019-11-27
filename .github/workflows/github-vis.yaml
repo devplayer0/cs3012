@@ -1,0 +1,29 @@
+name: GitHub Visualisations
+
+on:
+  - push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Install Now
+        run: yarn global add now
+
+      - name: Prepare code for deployment
+        run: |
+          # use minified vue.js
+          sed -i 's:vue/dist/vue.js:vue@2.6.10:g' github-vis/index.html
+          # install github token (it's read-only but still not great)
+          echo "const GRAPHQL_TOKEN = '${{ secrets.GRAPHQL_TOKEN }}';" > github-vis/token.js
+
+      - name: Deploy to Now
+        run: cd github-vis/ && now --token=${{ secrets.ZEIT_TOKEN }} --prod
