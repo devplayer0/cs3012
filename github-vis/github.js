@@ -3,7 +3,7 @@ async function githubUserInfo(user) {
     headers: {
       'Accept': 'application/vnd.github.v3+json'
     }
-  });
+  }).catch(err => null);
   if (!res.ok) {
     return null;
   }
@@ -54,8 +54,8 @@ async function githubDependencyGraph(token, repo, depth = 2) {
       'Accept': 'application/vnd.github.hawkgirl-preview+json'
     },
     body: JSON.stringify({ query })
-  });
-  if (!res.ok) {
+  }).catch(err => null);
+  if (!res || !res.ok) {
     return null;
   }
 

@@ -2,11 +2,11 @@ const router = new VueRouter({
   routes: [
     { path: '/', redirect: '/access' },
 
-    { path: '/access', component: Vue.component('AccessView') },
-    { path: '/access/:username', component: Vue.component('AccessView') },
+    { name: 'accessBlank', path: '/access', component: Vue.component('AccessView') },
+    { name: 'access', path: '/access/:username', component: Vue.component('AccessView') },
 
-    { path: '/graph', component: Vue.component('GraphView') },
-    { path: '/graph/:repo', component: Vue.component('GraphView') },
+    { name: 'graphBlank', path: '/graph', component: Vue.component('GraphView') },
+    { name: 'graph', path: '/graph/:repo', component: Vue.component('GraphView') },
 
     { path: '*', component: Vue.component('NotFound') }
   ]

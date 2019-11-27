@@ -92,13 +92,20 @@ Vue.component('UserInfo', {
   }
 });
 
-function paramSync(path, name, uriEncode = false) {
+function paramSync(route, name, options = {}) {
+  const o = _.defaults(options, {
+    query: false,
+    uriEncode: false
+  });
+
   const e = function(v) {
-    return uriEncode ? encodeURIComponent(v) : v;
+    return o.uriEncode ? encodeURIComponent(v) : v;
   };
   const d = function(v) {
-    return uriEncode ? decodeURIComponent(v || '') : v;
+    return o.uriEncode ? decodeURIComponent(v || '') : v;
   };
+  const k = o.query ? 'query' : 'params';
+  const kN = o.query ? 'params' : 'query';
 
   return {
     data() {
@@ -107,25 +114,40 @@ function paramSync(path, name, uriEncode = false) {
       };
     },
     created() {
-      this[name] = d(this.$route.params[name]);
+      this[name] = d(this.$route[k][name]);
     },
     watch: {
       $route(to, from) {
-        this[name] = d(to.params[name]);
+        this[name] = d(to[k][name]);
       },
-      [name](n, o) {
-        if (d(this.$route.params[name]) == n) {
+      [name](new_, old) {
+        if (d(this.$route[k][name]) == new_) {
           return;
         }
 
-        this.$router.push(`${path}/${e(n)}`);
+        this.$router.push({
+          name: new_ ? route : o.fallbackRoute,
+          [kN]: this.$route[kN],
+          [k]: {
+            [name]: e(new_)
+          }
+        });
       }
     }
   };
 }
 
 Vue.component('DependencyGraph', {
-  props: ['repo'],
+  props: {
+    repo: {
+      type: String,
+      required: true
+    },
+    depth: {
+      type: Number,
+      required: true
+    }
+  },
   template: `
     <div>
       <div v-show="error" class="alert alert-danger" role="alert">
@@ -142,6 +164,9 @@ Vue.component('DependencyGraph', {
   watch: {
     repo(n) {
       this.reloadData(n);
+    },
+    depth(n) {
+      this.reloadData(this.repo);
     }
   },
   mounted() {
@@ -270,7 +295,7 @@ Vue.component('DependencyGraph', {
       this.repulsionScale = d3.scaleLog()
         .domain([1, maxStars])
         .clamp(true)
-        .range([-200, -1700]);
+        .range([-400, -2300]);
 
       this.simulation
         .nodes(nodes)
