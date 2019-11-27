@@ -1,0 +1,12 @@
+body {
+    padding-top: 5rem;
+}
+
+.user-card {
+    max-width: 500px;
+}
+
+#depth-input {
+    flex: initial;
+    width: 4rem;
+}
