@@ -37,7 +37,9 @@ jobs:
           cp -r github-vis/ docs/build/html/
 
           # use minified vue.js
-          sed -i -e 's:vue/dist/vue.js:vue@2.6.10:g' docs/build/html/github-vis/index.html
+          sed -i 's:vue/dist/vue.js:vue@2.6.10:g' docs/build/html/github-vis/index.html
+          # install github token (it's read-only but still not great)
+          echo "const GRAPHQL_TOKEN = '$GRAPHQL_TOKEN';" > docs/build/html/github-vis/token.js
 
       - name: Deploy documentation and test report to GitHub pages
         uses: peaceiris/actions-gh-pages@v2.5.0

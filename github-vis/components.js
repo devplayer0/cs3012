@@ -215,7 +215,7 @@ Vue.component('DependencyGraph', {
       }
 
       this.$emit('load-start');
-      const data = await githubNLDependencyGraph('%%GRAPHQL_TOKEN%%', repo, this.depth);
+      const data = await githubNLDependencyGraph(GRAPHQL_TOKEN, repo, this.depth);
       if (!data) {
         this.$emit('load-end');
         this.error = true;
