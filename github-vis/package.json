@@ -1,0 +1,6 @@
+{
+  "name": "github-vis",
+  "dependencies": {
+    "@octokit/rest": "^16.35.0"
+  }
+}

@@ -1,8 +1,11 @@
 {
   "name": "github-vis",
   "version": 2,
+  "env": {
+    "GITHUB_TOKEN": "@github-token"
+  },
   "routes": [
     { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/index.html" }
+    { "src": "/(?!api/?)(.*)", "dest": "/index.html" }
   ]
 }

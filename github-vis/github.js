@@ -1,9 +1,5 @@
 async function githubUserInfo(user) {
-  const res = await fetch(`https://api.github.com/users/${user}`, {
-    headers: {
-      'Accept': 'application/vnd.github.v3+json'
-    }
-  }).catch(err => null);
+  const res = await fetch(`/api/users/${user}`).catch(err => null);
   if (!res.ok) {
     return null;
   }
