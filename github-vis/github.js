@@ -22,6 +22,7 @@ function _ghRecurseDGQ(i) {
         nodes {
           repository {
             nameWithOwner
+            forkCount
             stargazers(first: 0) {
               totalCount
             }
@@ -39,6 +40,7 @@ async function githubDependencyGraph(token, repo, depth = 2) {
   const query = `query {
     repository(owner: "${repoSplit[0]}", name: "${repoSplit[1]}") {
       nameWithOwner
+      forkCount
       stargazers {
         totalCount
       }
@@ -66,7 +68,7 @@ function _ghNLDGRecurse(repo, nodes, links) {
   if (nodes[repo.nameWithOwner]) {
     return;
   }
-  nodes[repo.nameWithOwner] = { stars: repo.stargazers.totalCount };
+  nodes[repo.nameWithOwner] = { stars: repo.stargazers.totalCount, forks: repo.forkCount };
 
   const manifests = repo.dependencyGraphManifests;
   if (!manifests) {

@@ -196,7 +196,7 @@ Vue.component('DependencyGraph', {
     applyDependencyIndicator(d) {
       let vx = d.target.x - d.source.x;
       let vy = d.target.y - d.source.y;
-      const mag = Math.sqrt(vx*vx + vy*vy);
+      const mag = Math.sqrt(vx*vx + vy*vy) || 1;
       vx /= mag;
       vy /= mag;
 
@@ -211,7 +211,7 @@ Vue.component('DependencyGraph', {
       }
 
       this.$emit('load-start');
-      const data = JSON.parse('{"nodes":[{"stars":2,"name":"netsoc/webspace-ng","fx":0,"fy":0},{"stars":5,"name":"joubin/DNSPython"},{"stars":1063,"name":"PythonCharmers/python-future"},{"stars":25,"name":"ThomasWaldmann/argparse"},{"stars":1,"name":"simplegeo/importlib"},{"stars":3,"name":"calvinchengx/python-unittest2"},{"stars":4,"name":"palaviv/eventfd"},{"stars":166,"name":"xolox/python-humanfriendly"},{"stars":2,"name":"onlytiancai/flake8"},{"stars":35,"name":"PyCQA/flake8-docstrings"},{"stars":587,"name":"PyCQA/pydocstyle"},{"stars":371,"name":"snowballstem/snowball"},{"stars":810,"name":"PyCQA/pyflakes"},{"stars":0,"name":"scooterman/pymunch"},{"stars":1056,"name":"Lawouach/WebSocket-for-Python"},{"stars":1098,"name":"cherrypy/cherrypy"},{"stars":90,"name":"cherrypy/cheroot"},{"stars":1115,"name":"erikrose/more-itertools"},{"stars":1,"name":"jaraco/portend"},{"stars":8,"name":"zopefoundation/zc.lockfile"},{"stars":1,"name":"Distrotech/setuptools"},{"stars":4693,"name":"cython/cython"},{"stars":8959,"name":"jupyter/jupyter"},{"stars":281,"name":"ipython/ipykernel"},{"stars":1628,"name":"jupyter-widgets/ipywidgets"},{"stars":133,"name":"jupyter/jupyter_console"},{"stars":797,"name":"jupyter/nbconvert"},{"stars":6559,"name":"jupyter/notebook"},{"stars":197,"name":"jupyter/qtconsole"},{"stars":3174,"name":"rkern/line_profiler"},{"stars":13897,"name":"ipython/ipython"},{"stars":2337,"name":"zeromq/pyzmq"},{"stars":4940,"name":"gevent/gevent"},{"stars":5138,"name":"pytest-dev/pytest"},{"stars":18568,"name":"tornadoweb/tornado"},{"stars":1095,"name":"python-greenlet/greenlet"},{"stars":157,"name":"pypa/wheel"},{"stars":7,"name":"calvinchengx/python-mock"}],"links":[{"source":"netsoc/webspace-ng","target":"joubin/DNSPython"},{"source":"joubin/DNSPython","target":"PythonCharmers/python-future"},{"source":"PythonCharmers/python-future","target":"ThomasWaldmann/argparse"},{"source":"PythonCharmers/python-future","target":"simplegeo/importlib"},{"source":"PythonCharmers/python-future","target":"calvinchengx/python-unittest2"},{"source":"netsoc/webspace-ng","target":"palaviv/eventfd"},{"source":"netsoc/webspace-ng","target":"xolox/python-humanfriendly"},{"source":"xolox/python-humanfriendly","target":"onlytiancai/flake8"},{"source":"xolox/python-humanfriendly","target":"PyCQA/flake8-docstrings"},{"source":"PyCQA/flake8-docstrings","target":"onlytiancai/flake8"},{"source":"PyCQA/flake8-docstrings","target":"PyCQA/pydocstyle"},{"source":"PyCQA/pydocstyle","target":"snowballstem/snowball"},{"source":"xolox/python-humanfriendly","target":"PyCQA/pyflakes"},{"source":"netsoc/webspace-ng","target":"scooterman/pymunch"},{"source":"netsoc/webspace-ng","target":"Lawouach/WebSocket-for-Python"},{"source":"Lawouach/WebSocket-for-Python","target":"cherrypy/cherrypy"},{"source":"cherrypy/cherrypy","target":"cherrypy/cheroot"},{"source":"cherrypy/cherrypy","target":"erikrose/more-itertools"},{"source":"cherrypy/cherrypy","target":"jaraco/portend"},{"source":"cherrypy/cherrypy","target":"zopefoundation/zc.lockfile"},{"source":"zopefoundation/zc.lockfile","target":"Distrotech/setuptools"},{"source":"Lawouach/WebSocket-for-Python","target":"cython/cython"},{"source":"cython/cython","target":"jupyter/jupyter"},{"source":"jupyter/jupyter","target":"ipython/ipykernel"},{"source":"jupyter/jupyter","target":"jupyter-widgets/ipywidgets"},{"source":"jupyter/jupyter","target":"jupyter/jupyter_console"},{"source":"jupyter/jupyter","target":"jupyter/nbconvert"},{"source":"jupyter/jupyter","target":"jupyter/notebook"},{"source":"jupyter/jupyter","target":"jupyter/qtconsole"},{"source":"cython/cython","target":"rkern/line_profiler"},{"source":"rkern/line_profiler","target":"cython/cython"},{"source":"rkern/line_profiler","target":"ipython/ipython"},{"source":"cython/cython","target":"zeromq/pyzmq"},{"source":"zeromq/pyzmq","target":"gevent/gevent"},{"source":"zeromq/pyzmq","target":"pytest-dev/pytest"},{"source":"zeromq/pyzmq","target":"tornadoweb/tornado"},{"source":"zeromq/pyzmq","target":"calvinchengx/python-unittest2"},{"source":"Lawouach/WebSocket-for-Python","target":"gevent/gevent"},{"source":"Lawouach/WebSocket-for-Python","target":"python-greenlet/greenlet"},{"source":"python-greenlet/greenlet","target":"Distrotech/setuptools"},{"source":"python-greenlet/greenlet","target":"pypa/wheel"},{"source":"Lawouach/WebSocket-for-Python","target":"calvinchengx/python-mock"},{"source":"Lawouach/WebSocket-for-Python","target":"pytest-dev/pytest"},{"source":"Lawouach/WebSocket-for-Python","target":"tornadoweb/tornado"}]}');
+      const data = JSON.parse('{"nodes":[{"stars":0,"forks":0,"fx":0,"fy":0,"name":"devplayer0/cs3012"},{"stars":962,"forks":102,"name":"nedbat/coveragepy"},{"stars":5142,"forks":1225,"name":"pytest-dev/pytest"},{"stars":180,"forks":20,"name":"untitaker/python-atomicwrites"},{"stars":2866,"forks":203,"name":"python-attrs/attrs"},{"stars":1811,"forks":139,"name":"tartley/colorama"},{"stars":7,"forks":0,"name":"calvinchengx/python-mock"},{"stars":1117,"forks":111,"name":"erikrose/more-itertools"},{"stars":137,"forks":93,"name":"pypa/packaging"},{"stars":496,"forks":104,"name":"pyparsing/pyparsing"},{"stars":586,"forks":137,"name":"benjaminp/six"},{"stars":55,"forks":12,"name":"mcmtroffaes/pathlib2"},{"stars":445,"forks":57,"name":"benhoyt/scandir"},{"stars":363,"forks":57,"name":"pytest-dev/pluggy"},{"stars":29,"forks":43,"name":"pytest-dev/py"},{"stars":146,"forks":24,"name":"jquast/wcwidth"},{"stars":901,"forks":227,"name":"yaml/pyyaml"},{"stars":250,"forks":130,"name":"PyCQA/astroid"},{"stars":281,"forks":24,"name":"jquast/blessed"},{"stars":6873,"forks":522,"name":"docopt/docopt"},{"stars":69,"forks":12,"name":"landscapeio/dodgy"},{"stars":5,"forks":0,"name":"certik/enum34"},{"stars":251,"forks":23,"name":"timothycrosley/deprecated.frosted"},{"stars":77,"forks":39,"name":"phihag/ipaddress"},{"stars":658,"forks":119,"name":"pytest-dev/pytest-cov"},{"stars":257,"forks":121,"name":"pytest-dev/pytest-html"},{"stars":13642,"forks":728,"name":"psf/black"},{"stars":8789,"forks":1311,"name":"aio-libs/aiohttp"},{"stars":137,"forks":25,"name":"aio-libs/aiohttp-cors"},{"stars":487,"forks":57,"name":"ActiveState/appdirs"},{"stars":8473,"forks":835,"name":"pallets/click"},{"stars":379,"forks":37,"name":"ericvsmith/dataclasses"},{"stars":2,"forks":11,"name":"onlytiancai/flake8"},{"stars":339,"forks":19,"name":"PyCQA/flake8-bugbear"},{"stars":88,"forks":13,"name":"ambv/flake8-mypy"},{"stars":0,"forks":1,"name":"chriskuehl/pre-commit"},{"stars":2451,"forks":526,"name":"PyCQA/pylint"},{"stars":1,"forks":0,"name":"Distrotech/setuptools"},{"stars":2,"forks":0,"name":"msabramo/tox"},{"stars":2,"forks":0,"name":"cheshire/virtualenv"}],"links":[{"source":"devplayer0/cs3012","target":"nedbat/coveragepy"},{"source":"devplayer0/cs3012","target":"pytest-dev/pytest"},{"source":"pytest-dev/pytest","target":"untitaker/python-atomicwrites"},{"source":"pytest-dev/pytest","target":"python-attrs/attrs"},{"source":"pytest-dev/pytest","target":"tartley/colorama"},{"source":"tartley/colorama","target":"calvinchengx/python-mock"},{"source":"pytest-dev/pytest","target":"erikrose/more-itertools"},{"source":"pytest-dev/pytest","target":"pypa/packaging"},{"source":"pypa/packaging","target":"pyparsing/pyparsing"},{"source":"pypa/packaging","target":"benjaminp/six"},{"source":"pytest-dev/pytest","target":"mcmtroffaes/pathlib2"},{"source":"mcmtroffaes/pathlib2","target":"calvinchengx/python-mock"},{"source":"mcmtroffaes/pathlib2","target":"benhoyt/scandir"},{"source":"mcmtroffaes/pathlib2","target":"benjaminp/six"},{"source":"pytest-dev/pytest","target":"pytest-dev/pluggy"},{"source":"pytest-dev/pytest","target":"pytest-dev/py"},{"source":"pytest-dev/pytest","target":"jquast/wcwidth"},{"source":"jquast/wcwidth","target":"yaml/pyyaml"},{"source":"jquast/wcwidth","target":"PyCQA/astroid"},{"source":"jquast/wcwidth","target":"jquast/blessed"},{"source":"jquast/wcwidth","target":"docopt/docopt"},{"source":"jquast/wcwidth","target":"landscapeio/dodgy"},{"source":"jquast/wcwidth","target":"certik/enum34"},{"source":"jquast/wcwidth","target":"timothycrosley/deprecated.frosted"},{"source":"jquast/wcwidth","target":"phihag/ipaddress"},{"source":"devplayer0/cs3012","target":"pytest-dev/pytest-cov"},{"source":"pytest-dev/pytest-cov","target":"nedbat/coveragepy"},{"source":"pytest-dev/pytest-cov","target":"pytest-dev/pytest"},{"source":"devplayer0/cs3012","target":"pytest-dev/pytest-html"},{"source":"pytest-dev/pytest-html","target":"psf/black"},{"source":"psf/black","target":"aio-libs/aiohttp"},{"source":"psf/black","target":"aio-libs/aiohttp-cors"},{"source":"psf/black","target":"ActiveState/appdirs"},{"source":"psf/black","target":"pallets/click"},{"source":"psf/black","target":"nedbat/coveragepy"},{"source":"psf/black","target":"ericvsmith/dataclasses"},{"source":"psf/black","target":"onlytiancai/flake8"},{"source":"psf/black","target":"PyCQA/flake8-bugbear"},{"source":"psf/black","target":"ambv/flake8-mypy"},{"source":"pytest-dev/pytest-html","target":"onlytiancai/flake8"},{"source":"pytest-dev/pytest-html","target":"chriskuehl/pre-commit"},{"source":"chriskuehl/pre-commit","target":"PyCQA/astroid"},{"source":"chriskuehl/pre-commit","target":"nedbat/coveragepy"},{"source":"chriskuehl/pre-commit","target":"onlytiancai/flake8"},{"source":"chriskuehl/pre-commit","target":"calvinchengx/python-mock"},{"source":"chriskuehl/pre-commit","target":"PyCQA/pylint"},{"source":"chriskuehl/pre-commit","target":"pytest-dev/pytest"},{"source":"chriskuehl/pre-commit","target":"Distrotech/setuptools"},{"source":"pytest-dev/pytest-html","target":"pytest-dev/pytest"},{"source":"pytest-dev/pytest-html","target":"msabramo/tox"},{"source":"msabramo/tox","target":"pytest-dev/py"},{"source":"msabramo/tox","target":"msabramo/tox"},{"source":"msabramo/tox","target":"cheshire/virtualenv"}]}');
       if (!data) {
         this.$emit('load-end');
         this.error = true;
@@ -292,18 +292,18 @@ Vue.component('DependencyGraph', {
         .domain([1, maxStars])
         .clamp(true)
         .range([5, 13]);
-      this.repulsionScale = d3.scaleLog()
+
+      const repulsionScale = d3.scaleLog()
         .domain([1, maxStars])
         .clamp(true)
         .range([-400, -2300]);
-
       this.simulation
         .nodes(nodes)
         .force('link')
           .links(links);
       this.simulation
         .force('repulsion')
-          .strength(d => this.repulsionScale(d.name.length));
+          .strength(d => repulsionScale(d.name.length));
       this.simulation
         .alphaTarget(0.3)
         .restart();
@@ -331,6 +331,12 @@ Vue.component('DependencyGraph', {
                 .attr('r', 2.5)
                 .attr('fill', 'red')));
 
+      const repoDisplay = d => d.name.split('/')[1];
+      const forkScale = d3.scaleLog()
+        .domain([1, _.max(_.map(nodes, n => n.forks))])
+        .clamp(true)
+        .range([0, 1]);
+      const forkColor = d => d.name == this.repo ? 'blue' : d3.interpolateYlGn(forkScale(d.forks));
       this.svg
         .selectAll('.node')
           .data(nodes)
@@ -342,7 +348,7 @@ Vue.component('DependencyGraph', {
                 .attr('cx', d => d.x)
                 .attr('cy', d => d.y)
                 .attr('r', d => this.radiusScale(d.stars))
-                .attr('fill', d => d.name == this.repo ? 'green' : 'black')
+                .attr('fill', forkColor)
                 .call(this.drag()))
             .call(enter => enter
               .append('text')
@@ -352,15 +358,16 @@ Vue.component('DependencyGraph', {
                 .attr('pointer-events', 'none')
                 .style('user-select', 'none')
                 .style('font-size', '0.8rem')
-                .text(d => d.name.split('/')[1])),
+                .text(repoDisplay)),
             update => update
               .raise()
               .call(update => update
                 .select('circle')
-                  .attr('r', d => this.radiusScale(d.stars)))
+                  .attr('r', d => this.radiusScale(d.stars))
+                  .attr('fill', forkColor))
               .call(update => update
                 .select('text')
-                  .text(d => d.name.split('/')[1])));
+                  .text(repoDisplay)));
     }
   }
 });
