@@ -15,10 +15,5 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: Prepare code for deployment
-        run: |
-          # use minified vue.js
-          sed -i 's:vue/dist/vue.js:vue@2.6.10:g' github-vis/index.html
-
       - name: Deploy to Now
         run: cd github-vis/ && npx now --token=${{ secrets.ZEIT_TOKEN }} --prod
