@@ -37,12 +37,6 @@ function _ghRecurseDGQ(i) {
 async function githubDependencyGraph(token, repo, depth = 2) {
   const repoSplit = repo.split('/');
   const query = `query {
-    rateLimit {
-      limit
-      cost
-      remaining
-      resetAt
-    }
     repository(owner: "${repoSplit[0]}", name: "${repoSplit[1]}") {
       nameWithOwner
       stargazers {
@@ -59,8 +53,7 @@ async function githubDependencyGraph(token, repo, depth = 2) {
       'Content-Type': 'application/json',
       'Accept': 'application/vnd.github.hawkgirl-preview+json'
     },
-    body: JSON.stringify({ query }),
-    mode: 'no-cors'
+    body: JSON.stringify({ query })
   });
   if (!res.ok) {
     return null;
@@ -95,7 +88,7 @@ function _ghNLDGRecurse(repo, nodes, links) {
 }
 async function githubNLDependencyGraph(token, repo, depth = 2) {
   const data = await githubDependencyGraph(token, repo, depth);
-  if (!data) {
+  if (!data || !data.data.repository) {
     return null;
   }
 

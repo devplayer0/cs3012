@@ -9,8 +9,9 @@ Vue.component('DebouncedInput', {
       <div v-if="prepend" class="input-group-prepend">
         <span class="input-group-text">{{ prepend }}</span>
       </div>
-      <input class="form-control" type="text" :placeholder="placeholder"
+      <input class="form-control" type="text" :placeholder="placeholder" :disabled="disabled"
              :value="value" @input="emitValue($event.target.value)" />
+      <slot></slot>
     </div>
   `,
   props: {
@@ -20,6 +21,7 @@ Vue.component('DebouncedInput', {
       type: Number,
       required: true
     },
+    disabled: Boolean,
     value: String
   },
   created() {
@@ -125,8 +127,18 @@ function paramSync(path, name, uriEncode = false) {
 Vue.component('DependencyGraph', {
   props: ['repo'],
   template: `
-    <svg width="100%" height="720"></svg>
+    <div>
+      <div v-show="error" class="alert alert-danger" role="alert">
+        Failed to retrieve dependency graph for '{{ repo }}'
+      </div>
+      <svg width="100%" height="720"></svg>
+    </div>
   `,
+  data() {
+    return {
+      error: false
+    };
+  },
   watch: {
     repo(n) {
       this.reloadData(n);
@@ -134,7 +146,8 @@ Vue.component('DependencyGraph', {
   },
   mounted() {
     this.svg = d3
-      .select(this.$el);
+      .select(this.$el)
+      .select('svg');
 
     const w = 600;
     const h = 600;
@@ -152,9 +165,7 @@ Vue.component('DependencyGraph', {
       .force('cy', d3.forceY())
       .on('tick', this.tick);
 
-    if (this.repo) {
-      this.reloadData();
-    }
+    this.reloadData(this.repo);
   },
   methods: {
     applyDependencyIndicator(d) {
@@ -168,13 +179,22 @@ Vue.component('DependencyGraph', {
       d.px = d.source.x + vx * (mag - dist);
       d.py = d.source.y + vy * (mag - dist);
     },
-    async reloadData() {
-      //const data = await githubNLDependencyGraph('REDACTED', this.repo, 4);
+    async reloadData(repo) {
+      this.error = false;
+      if (!this.repo) {
+        return;
+      }
+
+      this.$emit('load-start');
       const data = JSON.parse('{"nodes":[{"stars":2,"name":"netsoc/webspace-ng","fx":0,"fy":0},{"stars":5,"name":"joubin/DNSPython"},{"stars":1063,"name":"PythonCharmers/python-future"},{"stars":25,"name":"ThomasWaldmann/argparse"},{"stars":1,"name":"simplegeo/importlib"},{"stars":3,"name":"calvinchengx/python-unittest2"},{"stars":4,"name":"palaviv/eventfd"},{"stars":166,"name":"xolox/python-humanfriendly"},{"stars":2,"name":"onlytiancai/flake8"},{"stars":35,"name":"PyCQA/flake8-docstrings"},{"stars":587,"name":"PyCQA/pydocstyle"},{"stars":371,"name":"snowballstem/snowball"},{"stars":810,"name":"PyCQA/pyflakes"},{"stars":0,"name":"scooterman/pymunch"},{"stars":1056,"name":"Lawouach/WebSocket-for-Python"},{"stars":1098,"name":"cherrypy/cherrypy"},{"stars":90,"name":"cherrypy/cheroot"},{"stars":1115,"name":"erikrose/more-itertools"},{"stars":1,"name":"jaraco/portend"},{"stars":8,"name":"zopefoundation/zc.lockfile"},{"stars":1,"name":"Distrotech/setuptools"},{"stars":4693,"name":"cython/cython"},{"stars":8959,"name":"jupyter/jupyter"},{"stars":281,"name":"ipython/ipykernel"},{"stars":1628,"name":"jupyter-widgets/ipywidgets"},{"stars":133,"name":"jupyter/jupyter_console"},{"stars":797,"name":"jupyter/nbconvert"},{"stars":6559,"name":"jupyter/notebook"},{"stars":197,"name":"jupyter/qtconsole"},{"stars":3174,"name":"rkern/line_profiler"},{"stars":13897,"name":"ipython/ipython"},{"stars":2337,"name":"zeromq/pyzmq"},{"stars":4940,"name":"gevent/gevent"},{"stars":5138,"name":"pytest-dev/pytest"},{"stars":18568,"name":"tornadoweb/tornado"},{"stars":1095,"name":"python-greenlet/greenlet"},{"stars":157,"name":"pypa/wheel"},{"stars":7,"name":"calvinchengx/python-mock"}],"links":[{"source":"netsoc/webspace-ng","target":"joubin/DNSPython"},{"source":"joubin/DNSPython","target":"PythonCharmers/python-future"},{"source":"PythonCharmers/python-future","target":"ThomasWaldmann/argparse"},{"source":"PythonCharmers/python-future","target":"simplegeo/importlib"},{"source":"PythonCharmers/python-future","target":"calvinchengx/python-unittest2"},{"source":"netsoc/webspace-ng","target":"palaviv/eventfd"},{"source":"netsoc/webspace-ng","target":"xolox/python-humanfriendly"},{"source":"xolox/python-humanfriendly","target":"onlytiancai/flake8"},{"source":"xolox/python-humanfriendly","target":"PyCQA/flake8-docstrings"},{"source":"PyCQA/flake8-docstrings","target":"onlytiancai/flake8"},{"source":"PyCQA/flake8-docstrings","target":"PyCQA/pydocstyle"},{"source":"PyCQA/pydocstyle","target":"snowballstem/snowball"},{"source":"xolox/python-humanfriendly","target":"PyCQA/pyflakes"},{"source":"netsoc/webspace-ng","target":"scooterman/pymunch"},{"source":"netsoc/webspace-ng","target":"Lawouach/WebSocket-for-Python"},{"source":"Lawouach/WebSocket-for-Python","target":"cherrypy/cherrypy"},{"source":"cherrypy/cherrypy","target":"cherrypy/cheroot"},{"source":"cherrypy/cherrypy","target":"erikrose/more-itertools"},{"source":"cherrypy/cherrypy","target":"jaraco/portend"},{"source":"cherrypy/cherrypy","target":"zopefoundation/zc.lockfile"},{"source":"zopefoundation/zc.lockfile","target":"Distrotech/setuptools"},{"source":"Lawouach/WebSocket-for-Python","target":"cython/cython"},{"source":"cython/cython","target":"jupyter/jupyter"},{"source":"jupyter/jupyter","target":"ipython/ipykernel"},{"source":"jupyter/jupyter","target":"jupyter-widgets/ipywidgets"},{"source":"jupyter/jupyter","target":"jupyter/jupyter_console"},{"source":"jupyter/jupyter","target":"jupyter/nbconvert"},{"source":"jupyter/jupyter","target":"jupyter/notebook"},{"source":"jupyter/jupyter","target":"jupyter/qtconsole"},{"source":"cython/cython","target":"rkern/line_profiler"},{"source":"rkern/line_profiler","target":"cython/cython"},{"source":"rkern/line_profiler","target":"ipython/ipython"},{"source":"cython/cython","target":"zeromq/pyzmq"},{"source":"zeromq/pyzmq","target":"gevent/gevent"},{"source":"zeromq/pyzmq","target":"pytest-dev/pytest"},{"source":"zeromq/pyzmq","target":"tornadoweb/tornado"},{"source":"zeromq/pyzmq","target":"calvinchengx/python-unittest2"},{"source":"Lawouach/WebSocket-for-Python","target":"gevent/gevent"},{"source":"Lawouach/WebSocket-for-Python","target":"python-greenlet/greenlet"},{"source":"python-greenlet/greenlet","target":"Distrotech/setuptools"},{"source":"python-greenlet/greenlet","target":"pypa/wheel"},{"source":"Lawouach/WebSocket-for-Python","target":"calvinchengx/python-mock"},{"source":"Lawouach/WebSocket-for-Python","target":"pytest-dev/pytest"},{"source":"Lawouach/WebSocket-for-Python","target":"tornadoweb/tornado"}]}');
       if (!data) {
+        this.$emit('load-end');
+        this.error = true;
+        this.updateData([], []);
         return;
       }
       await sleep(500);
+      this.$emit('load-end');
 
       this.updateData(data.nodes, data.links);
     },
@@ -262,6 +282,7 @@ Vue.component('DependencyGraph', {
       this.simulation
         .alphaTarget(0.3)
         .restart();
+      setTimeout(() => this.simulation.alphaTarget(0), 500);
 
       this.svg
         .selectAll('.link')
@@ -289,23 +310,31 @@ Vue.component('DependencyGraph', {
         .selectAll('.node')
           .data(nodes)
           .join(enter => enter
-              .append('g')
-                .attr('class', 'node')
-              .call(enter => enter
-                .append('circle')
-                  .attr('cx', d => d.x)
-                  .attr('cy', d => d.y)
-                  .attr('r', d => this.radiusScale(d.stars))
-                  .attr('fill', d => d.name == this.repo ? 'green' : 'black')
-                  .call(this.drag()))
-              .call(enter => enter
-                .append('text')
-                  .attr('x', d => d.x)
-                  .attr('y', d => d.y)
-                  .attr('text-anchor', 'middle')
-                  .attr('pointer-events', 'none')
-                  .style('user-select', 'none')
-                  .style('font-size', '0.8rem')
+            .append('g')
+              .attr('class', 'node')
+            .call(enter => enter
+              .append('circle')
+                .attr('cx', d => d.x)
+                .attr('cy', d => d.y)
+                .attr('r', d => this.radiusScale(d.stars))
+                .attr('fill', d => d.name == this.repo ? 'green' : 'black')
+                .call(this.drag()))
+            .call(enter => enter
+              .append('text')
+                .attr('x', d => d.x)
+                .attr('y', d => d.y)
+                .attr('text-anchor', 'middle')
+                .attr('pointer-events', 'none')
+                .style('user-select', 'none')
+                .style('font-size', '0.8rem')
+                .text(d => d.name.split('/')[1])),
+            update => update
+              .raise()
+              .call(update => update
+                .select('circle')
+                  .attr('r', d => this.radiusScale(d.stars)))
+              .call(update => update
+                .select('text')
                   .text(d => d.name.split('/')[1])));
     }
   }

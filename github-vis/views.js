@@ -29,9 +29,22 @@ Vue.component('GraphView', {
       <h1>Dependency graph</h1>
       <p class="lead">Enter a repo's name to see its dependency graph.</p>
 
-      <debounced-input v-model="repo" :debounce="750" prepend="https://github.com/" placeholder="some-coder/some-repo">
+      <debounced-input v-model="repo" :disabled="loading" :debounce="750" prepend="https://github.com/" placeholder="some-coder/some-repo">
+        <div :style="{ visibility: loadingVisible }" class="spinner-border align-middle ml-2 mt-1" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
       </debounced-input>
-      <dependency-graph :repo="repo"></dependency-graph>
+      <dependency-graph :repo="repo" @load-start="loading = true" @load-end="loading = false"></dependency-graph>
     </div>
-  `
+  `,
+  data() {
+    return {
+      loading: false
+    };
+  },
+  computed: {
+    loadingVisible() {
+      return this.loading ? 'visible' : 'hidden';
+    }
+  }
 });
