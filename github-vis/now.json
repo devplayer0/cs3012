@@ -5,6 +5,7 @@
     "GITHUB_TOKEN": "@github-token"
   },
   "routes": [
+    { "src": "/api/dependencies/.*", "headers": { "Cache-Control": "max-age=0, s-maxage=7200" }, "continue": true },
     { "handle": "filesystem" },
     { "src": "/(?!api/?)(.*)", "dest": "/index.html" }
   ]

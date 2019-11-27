@@ -19,8 +19,6 @@ jobs:
         run: |
           # use minified vue.js
           sed -i 's:vue/dist/vue.js:vue@2.6.10:g' github-vis/index.html
-          # install github token (it's read-only but still not great)
-          echo "const GRAPHQL_TOKEN = '${{ secrets.GRAPHQL_TOKEN }}';" > github-vis/token.js
 
       - name: Deploy to Now
         run: cd github-vis/ && npx now --token=${{ secrets.ZEIT_TOKEN }} --prod

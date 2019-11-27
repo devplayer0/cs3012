@@ -1,6 +1,8 @@
 {
   "name": "github-vis",
   "dependencies": {
-    "@octokit/rest": "^16.35.0"
+    "lodash": "^4.17.15",
+    "@octokit/rest": "^16.35.0",
+    "@octokit/graphql": "^4.3.1"
   }
 }

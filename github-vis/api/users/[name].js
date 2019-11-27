@@ -7,8 +7,15 @@ const octokit = Octokit({
 
 export default async function(req, res) {
   const ghRes = await octokit.users
-    .getByUsername({ username: req.query.name })
-    .catch(err => ({ status: err.status }));
+    .getByUsername({
+      username: req.query.name
+    })
+    .catch(err => ({
+      status: err.status,
+      data: {
+        message: 'GitHub API error'
+      }
+    }));
 
   res
     .status(ghRes.status)
