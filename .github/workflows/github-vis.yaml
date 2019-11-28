@@ -16,4 +16,4 @@ jobs:
           node-version: '12.x'
 
       - name: Deploy to Now
-        run: cd github-vis/ && npx now --token=${{ secrets.ZEIT_TOKEN }} --prod
+        run: cd github-vis/ && now --token=${{ secrets.ZEIT_TOKEN }} --prod
