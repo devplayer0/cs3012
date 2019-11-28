@@ -307,7 +307,7 @@ Vue.component('DependencyGraph', {
       const repulsionScale = d3.scaleLog()
         .domain([1, maxStars])
         .clamp(true)
-        .range([-400, -2300]);
+        .range([-400, -2500]);
       this.simulation
         .nodes(nodes)
         .force('link')
