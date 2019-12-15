@@ -30,7 +30,7 @@ Click the badges above for `test results`_, documentation_ and coverage_.
 `here <https://github-vis.now.sh/access>`_
 
 **A GitHub API visualisation can be found**
-`here <https://github-vis.now.sh/graph>`_
+`here <https://github-vis.now.sh/graph/devplayer0%2Fcs3012?depth=4>`_
 
 .. |test results| image:: https://github.com/devplayer0/cs3012/workflows/Tests/badge.svg
 .. _test results: https://devplayer0.github.io/cs3012/tests.html
