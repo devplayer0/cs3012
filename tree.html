@@ -1,17 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LCA in a binary tree &#8212; Software Engineering (CS3012)  documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="LCA in a directed acyclic graph (DAG)" href="dag.html" />
@@ -34,9 +35,9 @@
             
   <div class="section" id="module-lca.tree">
 <span id="lca-in-a-binary-tree"></span><h1>LCA in a binary tree<a class="headerlink" href="#module-lca.tree" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+<dl class="py class">
 <dt id="lca.tree.Node">
-<em class="property">class </em><code class="sig-prename descclassname">lca.tree.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">lca.tree.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class representing a node in a binary tree</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attribute value</dt>
@@ -52,9 +53,9 @@
 <dd class="field-even"><p>the right child of the node, if any - assigning to this value will set the assigned node’s parent</p>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="lca.tree.Node.__eq__">
-<code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__eq__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__eq__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if this node’s value is equal to that of another node. (<code class="code docutils literal notranslate"><span class="pre">node_a</span> <span class="pre">==</span> <span class="pre">node_b</span></code>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -63,9 +64,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lca.tree.Node.__ge__">
-<code class="sig-name descname">__ge__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__ge__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__ge__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__ge__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__ge__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__ge__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if this node’s value is greater than or equal to that of another node. (<code class="code docutils literal notranslate"><span class="pre">node_a</span> <span class="pre">&gt;=</span> <span class="pre">node_b</span></code>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -74,9 +75,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lca.tree.Node.__gt__">
-<code class="sig-name descname">__gt__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__gt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__gt__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__gt__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__gt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__gt__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if this node’s value is greater than to that of another node. (<code class="code docutils literal notranslate"><span class="pre">node_a</span> <span class="pre">&gt;</span> <span class="pre">node_b</span></code>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -85,9 +86,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lca.tree.Node.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>value</strong> – the value of this node</p>
@@ -95,9 +96,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lca.tree.Node.__le__">
-<code class="sig-name descname">__le__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__le__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__le__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__le__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__le__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__le__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if this node’s value is less than or equal to that of another node. (<code class="code docutils literal notranslate"><span class="pre">node_a</span> <span class="pre">&lt;=</span> <span class="pre">node_b</span></code>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -106,9 +107,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lca.tree.Node.__lt__">
-<code class="sig-name descname">__lt__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__lt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__lt__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__lt__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__lt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__lt__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if this node’s value is less than that of another node. (<code class="code docutils literal notranslate"><span class="pre">node_a</span> <span class="pre">&lt;</span> <span class="pre">node_b</span></code>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -117,21 +118,21 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lca.tree.Node.__repr__">
 <code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__repr__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the debuggable string representation of this node’s value.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lca.tree.Node.__str__">
 <code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.__str__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the string representation of this node’s value.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lca.tree.Node.lca">
-<code class="sig-name descname">lca</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.lca"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.lca" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">lca</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.lca"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.lca" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the LCA (Lowest Common Ancestor) from within the tree whose root is this <a class="reference internal" href="#lca.tree.Node" title="lca.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -146,9 +147,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="lca.tree.Node.path">
-<code class="sig-name descname">path</code><span class="sig-paren">(</span><em class="sig-param">root</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.path" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lca/tree.html#Node.path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lca.tree.Node.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve the path from this node to <cite>root</cite> (<cite>root</cite> must be above this <a class="reference internal" href="#lca.tree.Node" title="lca.tree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -205,7 +206,7 @@
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -222,7 +223,7 @@
       &copy;2019, Jack O'Sullivan.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
