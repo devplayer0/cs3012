@@ -2,7 +2,7 @@
   "name": "github-vis",
   "license": "GPL-3.0",
   "dependencies": {
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "@octokit/rest": "^16.35.0",
     "@octokit/graphql": "^4.3.1"
   },
